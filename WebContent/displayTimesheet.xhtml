@@ -4,8 +4,27 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
+<h:head>
+	<title>displayTimesheet</title>
+</h:head>
+<h:body>
 	<ui:composition template="/templates/masterLayout.xhtml">
-	
-	
+		<ui:define name="windowTitle">
+            displayTimesheet
+         </ui:define>
+
+		<ui:define name="heading">
+			<ui:include src="/sections/login/header.xhtml" />
+		</ui:define>
+
+		<ui:define name="sidebarLeft">
+			<ui:include src="/sections/login/sidebarLeft.xhtml" />
+		</ui:define>
+		
+		<ui:define name="content">
+		
+		
+		</ui:define>
 	</ui:composition>
+</h:body>
 </html>
