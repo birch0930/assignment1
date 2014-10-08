@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:corejsf="http://corejsf.com/facelets">
 <h:head>
 	<title>login</title>
 </h:head>
@@ -21,7 +22,15 @@
 		</ui:define>
 
 		<ui:define name="content">
-
+		<h:form>
+			<h:panelGrid rows="3" columns="2" class="loginStyle">
+				User name: <h:inputText />
+				Password: <h:inputText />
+				<h:commandButton class="buttonStyle" size="50" value="submit" />
+				<h:commandLink value="Register" />
+			</h:panelGrid>
+		</h:form>
+		<h:graphicImage class="loginImgStyle" value="resources/images/loginImage.png" />
 
 		</ui:define>
 
