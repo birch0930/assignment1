@@ -1,0 +1,88 @@
+#heading {
+   padding: 20px;
+   height: 40px;
+   margin-bottom: 10px;
+   background-color: #d5edb3;
+   background-image: url(images/Time-Management.png);
+   background-repeat: no-repeat; 
+   border: 1px solid darkGray;
+}
+
+#sidebarLeft {
+   border: thin solid lightGray;
+   padding: 5px;
+   width: 200px;
+   height: 800px;
+   background-image: url(images/sideBar.png);
+   background-repeat: y; 
+}
+
+#content {
+   padding: 5px;
+   margin-top: 10px;
+   border: thin solid lightGray;
+   background: #fefeef;
+   position: absolute;
+   right: 8px;
+   left: 230px;
+   height: 800px;
+   top: 90px;
+}
+
+#footer {
+   padding: 20px;
+   margin-top: 10px;
+   height: 40px;
+   margin-bottom: 10px;
+   background-color: #d5edb3;
+   border: 1px solid darkGray;
+}
+
+.loginStyle {
+	border-spacing: 10px 50px;
+	font-size: 1.4em;
+	text-align: center;
+	margin-left:100px;
+	margin-top:100px;
+}
+
+.buttonStyle {
+	width: 100px;
+	height: 40px;
+	font-size:80%;
+}
+
+.loginImgStyle {
+	position: relative;
+	top: -350px;
+    right: -650px;
+}
+
+.header {
+   font-size: 1.4em;
+   font-style: italic;
+   font-family: Palatino;
+   text-align: center;
+}
+
+.planetImage {
+   padding: 5px;
+   text-align: center;
+}
+
+.planetImageSelected {
+   padding: 5px;
+   text-align: center;
+   background: #fefeef;
+   border: thin solid lightGray;
+}
+
+.welcome {
+   font-style: italic;
+   font-family: Palatino;
+}
+
+.welcomeImage {
+   margin-top: 10px;
+   text-align: center;
+}
