@@ -22,10 +22,12 @@
 		</ui:define>
 
 		<ui:define name="content">
+
 		<h:form>
+		
 			<h:panelGrid rows="3" columns="2" class="loginStyle">
-				User name: <h:inputText value="#{empControl.credential.userName}" />
-				Password: <h:inputText  value="#{empControl.credential.password}"/>
+				#{msgs.userName}:<h:inputText value="#{empControl.credential.userName}" />
+				#{msgs.pw}:<h:inputText value="#{empControl.credential.password}" />
 				<h:commandButton class="buttonStyle" value="#{msgs.login}" action="#{empControl.login}" />
 			</h:panelGrid>
 		</h:form>

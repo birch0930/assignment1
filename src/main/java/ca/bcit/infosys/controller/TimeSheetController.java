@@ -67,4 +67,9 @@ public class TimeSheetController  implements Serializable{
 //    public void setCategoryID(int categoryID) {
 //        this.categoryID = categoryID;
 //    }
+	
+	public String test(){
+		System.out.println("test");
+		return "login.xhtml";
+	}
 }

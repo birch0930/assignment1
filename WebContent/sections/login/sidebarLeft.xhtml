@@ -9,10 +9,10 @@
       <ui:composition>    
         
         	<h:form>
-        		<corejsf:nav name="Show Employees"  action="#{empControl.getEmployees}">
-        		</corejsf:nav>
-        		<corejsf:nav name="Create Employee" action="newEmp?faces-redirect=true">
-        		</corejsf:nav>
+        		<h:commandButton value="Show Employees"  action="#{empControl.getEmployees}" />
+        	
+        		<corejsf:nav name="Create Employee" outcome="newEmp?faces-redirect=true"/>
+        		
         	</h:form>
        
       </ui:composition>

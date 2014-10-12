@@ -1,10 +1,12 @@
 package ca.bcit.infosys.employee;
 
+import java.io.Serializable;
+
 /**
  * Login Credentials.
  * @author blink
  */
-public class Credentials {
+public class Credentials implements Serializable {
     /** The login ID. */
     private String userName;
     /** The password. */

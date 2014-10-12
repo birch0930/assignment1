@@ -26,9 +26,9 @@ public class EmployeeController implements Serializable {
 	private EmployeeManager empManager;
 	private List<Employee> empList;
 	@Inject
-	private Credentials credential;
-	@Inject
 	private Conversation conversation;
+	@Inject
+	private Credentials credential;
 
 	public String login() {
 		boolean result = empManager.verifyUser(credential);
@@ -44,8 +44,8 @@ public class EmployeeController implements Serializable {
 
 	public String getEmployees() {
 		empList = empManager.getEmployees();
-		System.out.println(empList);
-		return "superShowUser";
+
+		return "superShowUser.xhtml";
 	}
 
 	public void deleteEmployee(Employee emp) {

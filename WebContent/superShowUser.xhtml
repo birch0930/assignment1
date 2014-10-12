@@ -23,7 +23,7 @@
 
 		<ui:define name="content">
 					<h:form>
-				<h:dataTable value="#{employeeManage.employeeList}" var="emp"
+				<h:dataTable value="#{empControl.empList}" var="emp"
 					id="table">
 					<h:column>
 						<f:facet name="header">
@@ -50,7 +50,7 @@
             		#{emp.type}
             </h:column>
 					<h:column>
-						<h:commandButton action="#{employeeManage.getEmployees}" value="edit" />
+						<h:commandButton action="#{empControl.editEmployee(emp)}" value="edit" />
 					</h:column>
 				</h:dataTable>
 			</h:form>
