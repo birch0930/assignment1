@@ -28,7 +28,7 @@ import ca.bcit.infosys.employee.EmployeeList;
  * @version 1.0
  * 
  */
-@ConversationScoped
+
 public class EmployeeManager implements EmployeeList {
 	/** dataSource for connection pool on JBoss AS 7 or higher. */
 	@Resource(mappedName = "java:jboss/datasources/TIMESHEET")
@@ -316,6 +316,13 @@ public class EmployeeManager implements EmployeeList {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+
+
+	public void editEmployee(Employee emp) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

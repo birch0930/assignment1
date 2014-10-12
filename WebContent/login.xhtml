@@ -24,9 +24,9 @@
 		<ui:define name="content">
 		<h:form>
 			<h:panelGrid rows="3" columns="2" class="loginStyle">
-				User name: <h:inputText value="#{employeeManage.credentials.userName}" />
-				Password: <h:inputText  value="#{employeeManage.credentials.password}"/>
-				<h:commandButton class="buttonStyle" value="#{msgs.login}" action="#{employeeManage.login}" />
+				User name: <h:inputText value="#{empControl.credential.userName}" />
+				Password: <h:inputText  value="#{empControl.credential.password}"/>
+				<h:commandButton class="buttonStyle" value="#{msgs.login}" action="#{empControl.login}" />
 			</h:panelGrid>
 		</h:form>
 
