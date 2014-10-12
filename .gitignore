@@ -1,6 +1,11 @@
-/.project
+/target
+/.settings
 /.classpath
-/timesheet.vpp~1
-/timesheet.vpp
-/timesheet.vpp~1
-/.gitignore
+/.project
+*/target/*
+
+*.vpp~1
+<<<<<<< HEAD
+/target/
+=======
+>>>>>>> branch 'master' of https://github.com/birch0930/assignment1.git
