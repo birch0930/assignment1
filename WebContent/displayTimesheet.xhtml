@@ -25,7 +25,25 @@
 
 
 		</ui:define>
-
+				<h:form>
+				<h:dataTable value="#{customer.clist}" var="c" id="table" border="1">
+					<h:column>
+						<f:facet name="header">
+            		#{msgs.firstName}
+            	</f:facet>
+            		#{c.firstName}
+            </h:column>
+					<h:column>
+						<f:facet name="header">
+            		#{msgs.lastName}
+            	</f:facet>
+            		#{c.lastName}
+            </h:column>
+					<h:column>
+						<h:commandLink action="#{customer.findCustomer(c)}" value="edit" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
 		<ui:define name="footer">
 			<ui:include src="/sections/login/footer.xhtml" />
 		</ui:define>

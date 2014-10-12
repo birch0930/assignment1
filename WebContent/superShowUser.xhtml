@@ -14,7 +14,7 @@
          </ui:define>
 
 		<ui:define name="heading">
-			<ui:include src="/sections/login/header.xhtml" />
+			<ui:include src="/sections/header.xhtml" />
 		</ui:define>
 
 		<ui:define name="sidebarLeft">
@@ -22,12 +22,42 @@
 		</ui:define>
 
 		<ui:define name="content">
-
-
+					<h:form>
+				<h:dataTable value="#{employeeManage.employeeList}" var="emp"
+					id="table">
+					<h:column>
+						<f:facet name="header">
+            		#{msgs.empNum}
+            	</f:facet>
+            		#{emp.empNumber}
+            </h:column>
+					<h:column>
+						<f:facet name="header">
+            		#{msgs.empName}
+            	</f:facet>
+            		#{emp.name}
+            </h:column>
+            <h:column>
+						<f:facet name="header">
+            		#{msgs.userName}
+            	</f:facet>
+            		#{emp.userName}
+            </h:column>
+             <h:column>
+				<f:facet name="header">
+            		#{msgs.empAuthority}
+            	</f:facet>
+            		#{emp.type}
+            </h:column>
+					<h:column>
+						<h:commandButton action="#{employeeManage.getEmployees}" value="edit" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
 		</ui:define>
 
 		<ui:define name="footer">
-			<ui:include src="/sections/login/footer.xhtml" />
+			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

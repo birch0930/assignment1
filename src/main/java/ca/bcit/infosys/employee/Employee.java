@@ -13,7 +13,7 @@ public class Employee {
     private int empNumber;
     /** The employee's login ID. */
     private String userName;
-
+    private int type;
 
     /**
      * The no-argument constructor. Used to create new employees from within the
@@ -77,6 +77,14 @@ public class Employee {
     public final void setUserName(final String id) {
         userName = id;
     }
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 
 }

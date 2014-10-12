@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:corejsf="http://corejsf.com/facelets">
 <h:head>
-	<title>login</title>
+	<title>#{msgs.siteTitle}</title>
 </h:head>
 <h:body>
 	<ui:composition template="/templates/masterLayout.xhtml">
@@ -14,7 +14,7 @@
          </ui:define>
 
 		<ui:define name="heading">
-			<ui:include src="/sections/login/header.xhtml" />
+			<ui:include src="/sections/header.xhtml" />
 		</ui:define>
 
 		<ui:define name="sidebarLeft">
@@ -24,18 +24,18 @@
 		<ui:define name="content">
 		<h:form>
 			<h:panelGrid rows="3" columns="2" class="loginStyle">
-				User name: <h:inputText />
-				Password: <h:inputText />
-				<h:commandButton class="buttonStyle" value="submit" />
-				<h:commandLink value="Register" />
+				User name: <h:inputText value="#{employeeManage.credentials.userName}" />
+				Password: <h:inputText  value="#{employeeManage.credentials.password}"/>
+				<h:commandButton class="buttonStyle" value="#{msgs.login}" action="#{employeeManage.login}" />
 			</h:panelGrid>
 		</h:form>
+
 		<h:graphicImage class="loginImgStyle" value="resources/images/loginImage.png" />
 
 		</ui:define>
 
 		<ui:define name="footer">
-			<ui:include src="/sections/login/footer.xhtml" />
+			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>
