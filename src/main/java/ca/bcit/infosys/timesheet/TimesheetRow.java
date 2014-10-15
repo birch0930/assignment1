@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class TimesheetRow implements java.io.Serializable {
 
     /** Version number. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     /** Timesheet row index for Saturday. */
     public static final int SAT = 0;
@@ -67,42 +67,42 @@ public class TimesheetRow implements java.io.Serializable {
     /**
      * @return the projectID
      */
-    public final int getProjectID() {
+    public int getProjectID() {
         return projectID;
     }
 
     /**
      * @param id the projectID to set
      */
-    public final void setProjectID(final int id) {
+    public void setProjectID(final int id) {
         this.projectID = id;
     }
 
     /**
      * @return the workPackage
      */
-    public final String getWorkPackage() {
+    public String getWorkPackage() {
         return workPackage;
     }
 
     /**
      * @param wp the workPackage to set
      */
-    public final void setWorkPackage(final String wp) {
+    public void setWorkPackage(final String wp) {
         this.workPackage = wp;
     }
 
     /**
      * @return the hours charged for each day
      */
-    public final BigDecimal[] getHoursForWeek() {
+    public BigDecimal[] getHoursForWeek() {
         return hoursForWeek;
     }
 
     /**
      * @param hours the hours charged for each day
      */
-    public final void setHoursForWeek(final BigDecimal[] hours) {
+    public void setHoursForWeek(final BigDecimal[] hours) {
         checkHoursForWeek(hours);
         this.hoursForWeek = hours;
     }
@@ -111,7 +111,7 @@ public class TimesheetRow implements java.io.Serializable {
      * @param day The day of week to return charges for
      * @return charges in hours of specific day in week
      */
-    public final BigDecimal getHour(final int day) {
+    public BigDecimal getHour(final int day) {
         return hoursForWeek[day];
     }
 
@@ -119,7 +119,7 @@ public class TimesheetRow implements java.io.Serializable {
     * @param day The day of week to set the hour
     * @param hour The number of hours worked for that day
     */
-   public final void setHour(final int day, final BigDecimal hour) {
+   public void setHour(final int day, final BigDecimal hour) {
        checkHour(hour);
        hoursForWeek[day] = hour;
    }
@@ -127,7 +127,7 @@ public class TimesheetRow implements java.io.Serializable {
    * @param day The day of week to set the hour
    * @param hour The number of hours worked for that day
    */
-  public final void setHour(final int day, final double hour) {
+  public void setHour(final int day, final double hour) {
       BigDecimal bdHour = null;
       if (hour != 0.0) {
           bdHour = new BigDecimal(hour).setScale(1, BigDecimal.ROUND_HALF_UP);
@@ -176,21 +176,21 @@ public class TimesheetRow implements java.io.Serializable {
     /**
      * @return the notes
      */
-    public final String getNotes() {
+    public String getNotes() {
         return notes;
     }
 
     /**
      * @param comments the notes to set
      */
-    public final void setNotes(final String comments) {
+    public void setNotes(final String comments) {
         this.notes = comments;
     }
 
     /**
      * @return the weekly hours
      */
-    public final BigDecimal getSum() {
+    public BigDecimal getSum() {
         BigDecimal sum = BigDecimal.ZERO;
         for (BigDecimal next : hoursForWeek) {
             if (next != null) {

@@ -16,7 +16,7 @@ import ca.bcit.infosys.employee.Employee;
  */
 public class Timesheet implements java.io.Serializable {
     /** Serial version number. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     /** The user associated with this timesheet. */
     private Employee employee;
     /** The date of Friday for the week of the timesheet. */
@@ -80,14 +80,14 @@ public class Timesheet implements java.io.Serializable {
     /**
      * @return the employee.
      */
-    public final Employee getEmployee() {
+    public Employee getEmployee() {
         return employee;
     }
 
     /**
      * @return the endWeek
      */
-    public final Date getEndWeek() {
+    public Date getEndWeek() {
         return endWeek;
     }
 
@@ -103,7 +103,7 @@ public class Timesheet implements java.io.Serializable {
     /**
      * @param end the endWeek to set. Must be a Friday
      */
-    public final void setEndWeek(final Date end) {
+    public void setEndWeek(final Date end) {
         checkFriday(end);
         endWeek = end;
     }
@@ -111,11 +111,10 @@ public class Timesheet implements java.io.Serializable {
     /**
      * @return the weeknumber of the timesheet
      */
-    public final int getWeekNumber() {
+    public int getWeekNumber() {
         Calendar c = new GregorianCalendar();
         c.setTime(endWeek);
         c.setFirstDayOfWeek(Calendar.SATURDAY);
-        System.out.println(c.get(Calendar.WEEK_OF_YEAR));
         return c.get(Calendar.WEEK_OF_YEAR);
     }
 
@@ -125,7 +124,7 @@ public class Timesheet implements java.io.Serializable {
      * @param weekNo the week number of the timesheet week
      * @param weekYear the year of the timesheet
      */
-    public final void setWeekNumber(final int weekNo, final int weekYear) {
+    public void setWeekNumber(final int weekNo, final int weekYear) {
         Calendar c = new GregorianCalendar();
         c.setFirstDayOfWeek(Calendar.SATURDAY);
         c.setTime(endWeek);
@@ -136,7 +135,7 @@ public class Timesheet implements java.io.Serializable {
     /**
      * @return the endWeek as string
      */
-    public final String getWeekEnding() {
+    public String getWeekEnding() {
         Calendar c = new GregorianCalendar();
         c.setTime(endWeek);
         int year = c.get(Calendar.YEAR);
@@ -149,7 +148,7 @@ public class Timesheet implements java.io.Serializable {
     /**
      * @return the details
      */
-    public final List<TimesheetRow> getDetails() {
+    public List<TimesheetRow> getDetails() {
         return details;
     }
 
@@ -158,35 +157,35 @@ public class Timesheet implements java.io.Serializable {
      *
      * @param newDetails new weekly charges to set
      */
-    public final void setDetails(final ArrayList<TimesheetRow> newDetails) {
+    public void setDetails(final ArrayList<TimesheetRow> newDetails) {
         details = newDetails;
     }
 
     /**
      * @return the overtime
      */
-    public final BigDecimal getOvertime() {
+    public BigDecimal getOvertime() {
         return overtime;
     }
 
     /**
      * @param ot the overtime to set
      */
-    public final void setOvertime(final BigDecimal ot) {
+    public void setOvertime(final BigDecimal ot) {
         overtime = ot.setScale(1, BigDecimal.ROUND_HALF_UP);
     }
 
     /**
      * @return the flextime
      */
-    public final BigDecimal getFlextime() {
+    public BigDecimal getFlextime() {
         return flextime;
     }
 
     /**
      * @param flex the flextime to set
      */
-    public final void setFlextime(final BigDecimal flex) {
+    public void setFlextime(final BigDecimal flex) {
         flextime = flex.setScale(1, BigDecimal.ROUND_HALF_UP);
     }
 
@@ -195,7 +194,7 @@ public class Timesheet implements java.io.Serializable {
      *
      * @return total hours for timesheet.
      */
-    public final BigDecimal getTotalHours() {
+    public BigDecimal getTotalHours() {
         BigDecimal sum = BigDecimal.ZERO;
         for (TimesheetRow row : details) {
             sum = sum.add(row.getSum());
@@ -208,7 +207,7 @@ public class Timesheet implements java.io.Serializable {
      *
      * @return array of total hours for each day of week for timesheet.
      */
-    public final BigDecimal[] getDailyHours() {
+    public BigDecimal[] getDailyHours() {
         BigDecimal[] sums = new BigDecimal[DAYS_IN_WEEK];
         for (TimesheetRow day : details) {
             BigDecimal[] hours = day.getHoursForWeek();
@@ -229,7 +228,7 @@ public class Timesheet implements java.io.Serializable {
      * Checks to see if timesheet total nets 40 hours.
      * @return true if FULL_WORK_WEEK == hours -flextime - overtime
      */
-    public final boolean isValid() {
+    public boolean isValid() {
         BigDecimal net = getTotalHours();
         if (overtime != null) {
             net = net.subtract(overtime);
@@ -246,14 +245,14 @@ public class Timesheet implements java.io.Serializable {
      * @param rowToRemove
      *            the row to remove from the timesheet.
      */
-    public final void deleteRow(final TimesheetRow rowToRemove) {
+    public void deleteRow(final TimesheetRow rowToRemove) {
         details.remove(rowToRemove);
     }
 
     /**
      * Add an empty to to the timesheet.
      */
-    public final void addRow() {
+    public void addRow() {
         details.add(new TimesheetRow());
     }
 

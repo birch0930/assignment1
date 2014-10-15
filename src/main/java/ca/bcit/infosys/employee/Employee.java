@@ -1,18 +1,23 @@
 package ca.bcit.infosys.employee;
 
+import java.io.Serializable;
+
 /**
  * A class representing a single Employee.
  *
  * @author Bruce Link
  *
  */
-public class Employee {
+public class Employee implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /** The employee's name. */
     private String name;
     /** The employee's employee number. */
     private int empNumber;
     /** The employee's login ID. */
     private String userName;
+    /** The employee's type. */
     private int type;
 
     /**
@@ -39,42 +44,42 @@ public class Employee {
     /**
      * @return the name
      */
-    public final String getName() {
+    public String getName() {
         return name;
     }
 
     /**
      * @param empName the name to set
      */
-    public final void setName(final String empName) {
+    public void setName(final String empName) {
         name = empName;
     }
 
     /**
      * @return the empNumber
      */
-    public final int getEmpNumber() {
+    public int getEmpNumber() {
         return empNumber;
     }
 
     /**
      * @param number the empNumber to set
      */
-    public final void setEmpNumber(final int number) {
+    public void setEmpNumber(final int number) {
         empNumber = number;
     }
 
     /**
      * @return the userName
      */
-    public final String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
     /**
      * @param id the userName to set
      */
-    public final void setUserName(final String id) {
+    public void setUserName(final String id) {
         userName = id;
     }
 

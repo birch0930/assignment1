@@ -7,6 +7,8 @@ import java.io.Serializable;
  * @author blink
  */
 public class Credentials implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /** The login ID. */
     private String userName;
     /** The password. */
@@ -14,25 +16,25 @@ public class Credentials implements Serializable {
     /**
      * @return the loginID
      */
-    public final String getUserName() {
+    public String getUserName() {
         return userName;
     }
     /**
      * @param id the loginID to set
      */
-    public final void setUserName(final String id) {
+    public void setUserName(final String id) {
         userName = id;
     }
     /**
      * @return the password
      */
-    public final String getPassword() {
+    public String getPassword() {
         return password;
     }
     /**
      * @param pw the password to set
      */
-    public final void setPassword(final String pw) {
+    public void setPassword(final String pw) {
         password = pw;
     }
 

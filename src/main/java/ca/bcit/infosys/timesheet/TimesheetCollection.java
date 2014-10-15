@@ -5,8 +5,6 @@ import java.util.List;
 
 import ca.bcit.infosys.employee.Employee;
 
-
-
 /**
  * A interface for accessing all existing Timesheets.
  *
