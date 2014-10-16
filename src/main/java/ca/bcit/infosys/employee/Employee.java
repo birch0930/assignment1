@@ -20,17 +20,7 @@ public class Employee implements Serializable {
     /** The employee's type. */
     private int type;
     private boolean editable;
-<<<<<<< HEAD
 
-    public boolean isEditable() {
-		return editable;
-	}
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}
-=======
->>>>>>> refs/remotes/origin/master
 
     public boolean isEditable() {
 		return editable;

@@ -31,6 +31,7 @@ public class EmployeeController implements Serializable {
 	//private Conversation conversation;
 	@Inject
 	private Credentials credential;
+	@Inject private Employee currentEmployee;
 
 	public String login() {
 		boolean result = empManager.verifyUser(credential);		
@@ -90,6 +91,14 @@ public class EmployeeController implements Serializable {
 
 	public String update() {
 		return "superShowUser";
+	}
+
+	public Employee getCurrentEmployee() {
+		return currentEmployee;
+	}
+
+	public void setCurrentEmployee(Employee currentEmployee) {
+		this.currentEmployee = currentEmployee;
 	}
 	
 }
