@@ -22,37 +22,64 @@
 		</ui:define>
 
 		<ui:define name="content">
-					<h:form>
-				<h:dataTable value="#{empControl.empList}" var="emp"
-					id="table">
+			<h:form>
+				<h:dataTable value="#{empControl.empList}" var="emp" id="table">
 					<h:column>
 						<f:facet name="header">
-            		#{msgs.empNum}
-            	</f:facet>
-            		#{emp.empNumber}
-            </h:column>
-					<h:column>
-						<f:facet name="header">
-            		#{msgs.empName}
-            	</f:facet>
-            		#{emp.name}
-            </h:column>
-            <h:column>
-						<f:facet name="header">
-            		#{msgs.userName}
-            	</f:facet>
-            		#{emp.userName}
-            </h:column>
-             <h:column>
-				<f:facet name="header">
-            		#{msgs.empAuthority}
-            	</f:facet>
-            		#{emp.type}
-            </h:column>
-					<h:column>
-						<h:commandButton action="#{empControl.editEmployee(emp)}" value="edit" />
+							<h:outputText value="#{msgs.editColumn}" style="font-weight: bold" />
+						</f:facet>
+						<h:selectBooleanCheckbox value="#{emp.editable}" onclick="submit()" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.empNum}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{emp.empNumber}" rendered="#{emp.editable}"
+									 size="10" />
+						<h:outputText value="#{emp.empNumber}" rendered="#{not emp.editable}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.empName}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{emp.name}" rendered="#{emp.editable}"
+									 size="10" />
+						<h:outputText value="#{emp.name}" rendered="#{not emp.editable}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.userName}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{emp.userName}" rendered="#{emp.editable}"
+									 size="10" />
+						<h:outputText value="#{emp.userName}" rendered="#{not emp.editable}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.empAuthority}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:outputText value="#{emp.type}" />
+					</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{msgs.deleteColumn}"
+						style="font-weight: bold" />
+				</f:facet>
+				<h:commandButton value="#{msgs.deleteColumn}"
+					action="#{empControl.empManager.deleteEmpoyee(emp)}" />
+			</h:column>
 				</h:dataTable>
+			<h:commandButton value="#{msgs.save}"
+					action="#{empControl.update}" />
 			</h:form>
 		</ui:define>
 

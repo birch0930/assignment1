@@ -19,8 +19,17 @@ public class Employee implements Serializable {
     private String userName;
     /** The employee's type. */
     private int type;
+    private boolean editable;
 
-    /**
+    public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+
+	/**
      * The no-argument constructor. Used to create new employees from within the
      * application.
      */
@@ -35,10 +44,11 @@ public class Employee implements Serializable {
      * @param number the empNumber of the user.
      * @param id the loginID of the user.
      */
-    public Employee(final String empName, final int number, final String id) {
+    public Employee(final String empName, final int number, final String id, final int empType) {
         name = empName;
         empNumber = number;
         userName = id;
+        type = empType;
     }
 
     /**
