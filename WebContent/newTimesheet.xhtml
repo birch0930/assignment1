@@ -14,20 +14,105 @@
          </ui:define>
 
 		<ui:define name="heading">
-			<ui:include src="/sections/login/header.xhtml" />
+			<ui:include src="/sections/header.xhtml" />
 		</ui:define>
 
 		<ui:define name="sidebarLeft">
-			<ui:include src="/sections/login/sidebarLeft.xhtml" />
+			<ui:include src="/sections/timesheet/sidebarLeft.xhtml" />
 		</ui:define>
 
 		<ui:define name="content">
 
+<h:panelGrid  columns="8">
+		
+		#{msgs.empNum}: <h:outputText value="#{sheetControl.currentTimesheet.employee.empNumber}" />
+		#{msgs.weekNum}:<h:outputText value="11" />
+		#{msgs.weekEnd}:<h:outputText value="#{sheetControl.currentTimesheet.endWeek}" />
+		</h:panelGrid>
+		
+		#{msgs.empName}:<h:outputText value="#{sheetControl.currentTimesheet.employee.name}" />
+		<h:form>
+			<h:dataTable value="#{sheetControl.currentTimesheet.details}" var="row" id="table" border="1">
+				<h:column>
+					<f:facet name="header">
+            		#{msgs.formProject}
+            	</f:facet>
+            		
+            		<h:inputText value="#{row.projectID}"  size="10"/>
+            </h:column>
+				<h:column>
+					<f:facet name="header">
+            		#{msgs.formWP}
+            	</f:facet>
+            		<h:inputText value="#{row.workPackage}"  size="10"/>
+            </h:column>
+            <h:column>
+					<f:facet name="header">
+            		#{msgs.formTotal}
+            	</f:facet>
+            		
+            </h:column>
+            <h:column>
+					<f:facet name="header">
+            		#{msgs.sat}
+            	</f:facet>
+            		<h:inputText value="#{row.hoursForWeek[currentTimesheet.SAT]}"  size="2"/>
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.sun}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.SUN]}"  size="2"/>
+            	
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.mon}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.MON]}"  size="2"/>
+            	
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.tue}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.TUE]}"  size="2"/>
+            		
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.wed}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.WED]}"  size="2"/>
+            		
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.thu}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.THU]}"  size="2"/>
+            	
+            </h:column> <h:column>
+					<f:facet name="header">
+            		#{msgs.fri}
+            	</f:facet>
+            	<h:inputText value="#{row.hoursForWeek[currentTimesheet.FRI]}"  size="2"/>
+            		
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.formNotes}
+            	</f:facet>
+            		<h:inputText value="#{row.notes}"  size="12"/>
+            </h:column>
+			
+			</h:dataTable>
+		</h:form>
 
 		</ui:define>
 
 		<ui:define name="footer">
-			<ui:include src="/sections/login/footer.xhtml" />
+			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

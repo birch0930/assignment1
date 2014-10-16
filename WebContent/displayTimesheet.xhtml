@@ -14,38 +14,97 @@
          </ui:define>
 
 		<ui:define name="heading">
-			<ui:include src="/sections/login/header.xhtml" />
+			<ui:include src="/sections/header.xhtml" />
 		</ui:define>
 
 		<ui:define name="sidebarLeft">
-			<ui:include src="/sections/login/sidebarLeft.xhtml" />
+			<ui:include src="/sections/timesheet/sidebarLeft.xhtml" />
 		</ui:define>
 
 		<ui:define name="content">
-
+		<h:panelGrid  columns="8">
+		
+		#{msgs.empNum}: <h:outputText value="#{sheetControl.currentTimesheet.employee.empNumber}" />
+		#{msgs.weekNum}:<h:outputText value="#{sheetControl.currentTimesheet.weekNumber}" />
+		#{msgs.weekEnd}:<h:outputText value="#{sheetControl.currentTimesheet.weekEnding}" />
+		</h:panelGrid>
+		
+		#{msgs.empName}:<h:outputText value="#{sheetControl.currentTimesheet.employee.name}" />
+		<h:form>
+			<h:dataTable value="#{sheetControl.currentTimesheet.details}" var="row" id="table" border="1">
+				<h:column>
+					<f:facet name="header">
+            		#{msgs.formProject}
+            	</f:facet>
+            		#{row.projectID}
+            </h:column>
+				<h:column>
+					<f:facet name="header">
+            		#{msgs.formWP}
+            	</f:facet>
+            		#{row.workPackage}
+            </h:column>
+            <h:column>
+					<f:facet name="header">
+            		#{msgs.formTotal}
+            	</f:facet>
+            		#{row.lastName}
+            </h:column>
+            <h:column>
+					<f:facet name="header">
+            		#{msgs.sat}
+            	</f:facet>
+            		#{row.hoursForWeek[row.SAT]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.sun}
+            	</f:facet>
+            		#{row.hoursForWeek[row.SUN]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.mon}
+            	</f:facet>
+            		#{row.hoursForWeek[row.MON]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.tue}
+            	</f:facet>
+            		#{row.hoursForWeek[row.TUE]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.wed}
+            	</f:facet>
+            		#{row.hoursForWeek[row.WED]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.thu}
+            	</f:facet>
+            		#{row.hoursForWeek[row.THU]}
+            </h:column> <h:column>
+					<f:facet name="header">
+            		#{msgs.fri}
+            	</f:facet>
+            		#{row.hoursForWeek[row.FRI]}
+            </h:column>
+             <h:column>
+					<f:facet name="header">
+            		#{msgs.formNotes}
+            	</f:facet>
+            		#{row.notes}
+            </h:column>
+			
+			</h:dataTable>
+		</h:form>
 
 		</ui:define>
-				<h:form>
-				<h:dataTable value="#{customer.clist}" var="c" id="table" border="1">
-					<h:column>
-						<f:facet name="header">
-            		#{msgs.firstName}
-            	</f:facet>
-            		#{c.firstName}
-            </h:column>
-					<h:column>
-						<f:facet name="header">
-            		#{msgs.lastName}
-            	</f:facet>
-            		#{c.lastName}
-            </h:column>
-					<h:column>
-						<h:commandLink action="#{customer.findCustomer(c)}" value="edit" />
-					</h:column>
-				</h:dataTable>
-			</h:form>
+		
 		<ui:define name="footer">
-			<ui:include src="/sections/login/footer.xhtml" />
+			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

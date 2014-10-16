@@ -2,12 +2,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:corejsf="http://corejsf.com/facelets">
    <head><title>IGNORED</title></head>  
    <body>        
       <ui:composition>    
-         <div class="welcome">
-             	  
+         <div >         	
+        		<corejsf:nav name="Add Timesheet" outcome="newTimesheet?faces-redirect=true"/>  
+        		<corejsf:nav name="Current Timesheet" outcome="displayTimesheet"/> 
+        		<corejsf:nav name="Previous Timesheet" outcome="findPreTimesheet?faces-redirect=true"/>  
          </div>	   	
       </ui:composition>
    </body>
