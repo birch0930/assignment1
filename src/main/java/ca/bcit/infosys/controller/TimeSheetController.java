@@ -1,12 +1,20 @@
 package ca.bcit.infosys.controller;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import ca.bcit.infosys.access.TimesheetManager;
+import ca.bcit.infosys.employee.Employee;
+import ca.bcit.infosys.timesheet.Timesheet;
+import ca.bcit.infosys.timesheet.TimesheetCollection;
 
 
 /**
@@ -17,59 +25,95 @@ import javax.inject.Named;
  */
 @Named("sheetControl")
 @ConversationScoped
-public class TimeSheetController  implements Serializable{
-//    /** Hold ID used to reference category record. */
-//    private int categoryID;
-//    /** Manager for category objects.*/
-//    @Inject private CategoryManager categoryManager;
-//    /** mechanism for starting conversation. */
-//    @Inject private Conversation conversation;
-//    /**
-//     * Construct list of SelectItems for all categories from database.
-//     * @return array of all categories.
-//     */
-//    public Category[] getCategoryItems() {
-//   //TESTCategory[] categories = {new Category(1,"One"), new Category(2,"two")};
-//        Category[] categories = categoryManager.getAll();
-//        return categories;
-//    }
-//    /**
-//     * Action method for index form.
-//     * @return next page selector.
-//     */
-//    public String action() {
-//        //start conversation to handle products for one category
-//        conversation.begin();
-//        return "displayProduct";
-//    }
-//
-//    /**
-//     * categoryID accessor.
-//     * @return the categoryID
-//     */
-//    public int getCategoryID() {
-//        return categoryID;
-//    }
-//    
-//    public String getName() {
-//        Category c = categoryManager.find(categoryID);
-//        if (c != null) {
-//            return c.getName();
-//        } else {
-//            return "Not Found";
-//        }
-//    }
-//
-//    /**
-//     * categoryID mutator.
-//     * @param categoryID the categoryID to set
-//     */
-//    public void setCategoryID(int categoryID) {
-//        this.categoryID = categoryID;
-//    }
+public class TimeSheetController  implements Serializable, TimesheetCollection{
+
+
+	@Inject private EmployeeController empControl;
+	@Inject private Timesheet currentTimesheet;
+	@Inject private TimesheetManager timesheetManager;
+	 private List<Timesheet> timesheetList;
 	
-	public String test(){
-		System.out.println("test");
-		return "login.xhtml";
+	public TimeSheetController() {
+		
 	}
+	
+	@Override
+	public List<Timesheet> getTimesheets() {
+		timesheetList  = timesheetManager.getTimesheets();
+		return timesheetList;
+	}
+
+	@Override
+	public List<Timesheet> getTimesheets(Employee e) {
+		timesheetList = getTimesheets();
+		if(timesheetList == null) return null;
+		for (Timesheet timesheet : timesheetList) {
+			if(!timesheet.getEmployee().equals(e))
+				timesheetList.remove(timesheet);
+		}
+		return timesheetList;
+	}
+
+
+
+	@Override
+	public Timesheet getCurrentTimesheet(Employee e) {
+		timesheetList =  getTimesheets(e);
+		if(timesheetList == null) return null;
+		 Calendar c = new GregorianCalendar();
+	
+		for (Timesheet timesheet : timesheetList) {
+			if(  c.get(Calendar.WEEK_OF_YEAR) == timesheet.getWeekNumber() )
+				return timesheet;			
+			}
+		return null;
+	}
+
+	@Override
+	public String addTimesheet() {
+		currentTimesheet = new Timesheet();
+		currentTimesheet.setEmployee(empControl.getCurrentEmployee());
+		return "addTimesheet";
+	}
+
+	
+	public String saveTimesheet(){
+		timesheetManager.add(currentTimesheet);
+		return "displayTimesheet.xhtml";
+	}
+	
+	public Timesheet getCurrentTimesheet() {
+		return currentTimesheet;
+	}
+
+	public void setCurrentTimesheet(Timesheet currentTimesheet) {
+		this.currentTimesheet = currentTimesheet;
+	}
+
+	public EmployeeController getEmpControl() {
+		return empControl;
+	}
+
+	public void setEmpControl(EmployeeController empControl) {
+		this.empControl = empControl;
+	}
+
+	public TimesheetManager getTimesheetManager() {
+		return timesheetManager;
+	}
+
+	public void setTimesheetManager(TimesheetManager timesheetManager) {
+		this.timesheetManager = timesheetManager;
+	}
+
+	public List<Timesheet> getTimesheetList() {
+		return timesheetList;
+	}
+
+	public void setTimesheetList(List<Timesheet> timesheetList) {
+		this.timesheetList = timesheetList;
+	}
+
+	
+	
 }

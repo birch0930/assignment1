@@ -3,8 +3,10 @@ package ca.bcit.infosys.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,32 +22,34 @@ import ca.bcit.infosys.employee.Employee;
  *
  */
 @Named("empControl")
-@ConversationScoped
+@SessionScoped
 public class EmployeeController implements Serializable {
 	@Inject
 	private EmployeeManager empManager;
 	private List<Employee> empList;
-	@Inject
-	private Conversation conversation;
+	//@Inject
+	//private Conversation conversation;
 	@Inject
 	private Credentials credential;
 
 	public String login() {
-		boolean result = empManager.verifyUser(credential);
+		boolean result = empManager.verifyUser(credential);		
 		if (result) {
-			int type = empManager.getCurrentEmployee().getType();
-			if (type == 0)
-				return "super";
+			int type = empManager.getEmployee(credential.getUserName()).getType();
+			if (type == 0){
+				getEmployees();
+				return "superShowUser";
+			}
 			else
 				return "user";
 		} else
 			return "failure";
 	}
 
-	public String getEmployees() {
+	public void getEmployees() {
 		empList = empManager.getEmployees();
 
-		return "superShowUser.xhtml";
+		//return "superShowUser.xhtml";
 	}
 
 	public void deleteEmployee(Employee emp) {
@@ -57,12 +61,6 @@ public class EmployeeController implements Serializable {
 	public String newEmployee(Employee emp) {
 		if (emp != null)
 			empManager.addEmployee(emp);
-		return "superShowUser";
-	}
-
-	public String editEmployee(Employee emp) {
-		if (emp != null)
-			empManager.editEmployee(emp);
 		return "superShowUser";
 	}
 
@@ -90,11 +88,8 @@ public class EmployeeController implements Serializable {
 		this.credential = credential;
 	}
 
-	public Conversation getConversation() {
-		return conversation;
+	public String update() {
+		return "superShowUser";
 	}
-
-	public void setConversation(Conversation conversation) {
-		this.conversation = conversation;
-	}
+	
 }
