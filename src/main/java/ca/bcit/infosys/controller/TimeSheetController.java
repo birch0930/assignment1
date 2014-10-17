@@ -1,13 +1,13 @@
 package ca.bcit.infosys.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,7 +32,9 @@ public class TimeSheetController  implements Serializable, TimesheetCollection{
 	@Inject private Timesheet currentTimesheet;
 	@Inject private TimesheetManager timesheetManager;
 	 private List<Timesheet> timesheetList;
-	
+	 
+	@Inject private Conversation conversation;
+
 	public TimeSheetController() {
 		
 	}
@@ -71,14 +73,22 @@ public class TimeSheetController  implements Serializable, TimesheetCollection{
 
 	@Override
 	public String addTimesheet() {
+		conversation.begin();
 		currentTimesheet = new Timesheet();
+		System.out.println(empControl.getCurrentEmployee().getName());
 		currentTimesheet.setEmployee(empControl.getCurrentEmployee());
-		return "addTimesheet";
+		return "newTimesheet.xhtml";
 	}
-
+	
+	public String addRow(){
+		currentTimesheet.addRow();
+		System.out.println("add");
+		return "newTimesheet.xhtml";
+	}
 	
 	public String saveTimesheet(){
 		timesheetManager.add(currentTimesheet);
+		conversation.end();
 		return "displayTimesheet.xhtml";
 	}
 	
@@ -113,6 +123,15 @@ public class TimeSheetController  implements Serializable, TimesheetCollection{
 	public void setTimesheetList(List<Timesheet> timesheetList) {
 		this.timesheetList = timesheetList;
 	}
+
+	public Conversation getConversation() {
+		return conversation;
+	}
+
+	public void setConversation(Conversation conversation) {
+		this.conversation = conversation;
+	}
+
 
 	
 	

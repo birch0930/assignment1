@@ -94,6 +94,7 @@ public class EmployeeController implements Serializable {
 	}
 
 	public Employee getCurrentEmployee() {
+		currentEmployee = empManager.getCurrentEmployee();
 		return currentEmployee;
 	}
 

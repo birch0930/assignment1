@@ -8,4 +8,8 @@
     <tag-name>nav</tag-name>
     <source>tags/corejsf/nav.xhtml</source>
   </tag>
+   <tag>
+    <tag-name>timesheetRow</tag-name>
+    <source>tags/corejsf/timesheetRow.xhtml</source>
+  </tag>
 </facelet-taglib>

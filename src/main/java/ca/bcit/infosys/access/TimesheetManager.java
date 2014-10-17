@@ -12,7 +12,7 @@ public class TimesheetManager implements java.io.Serializable{
 	
 	
 	
-	List<Timesheet>  timesheetList =  new ArrayList<Timesheet>(); 
+	static private List<Timesheet>  timesheetList =  new ArrayList<Timesheet>(); 
 	public void add(Timesheet timesheet){
 		timesheetList.add(timesheet);
 	}

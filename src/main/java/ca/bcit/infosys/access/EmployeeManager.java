@@ -108,9 +108,12 @@ found.
 			String pw = combos.get(credential.getUserName
 
 ());
-			if(credential.getPassword().equals(pw)) return 
+			if(credential.getPassword().equals(pw)) {
+				employee = getEmployee(credential.getUserName());
+				return true;
+			}
 
-true;
+
 			else return false;
 		}
 		return false;

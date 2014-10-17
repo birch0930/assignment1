@@ -2,13 +2,22 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:corejsf="http://corejsf.com/facelets">
    <head><title>IGNORED</title></head>  
    <body>        
       <ui:composition>    
-         <div class="welcome">
-             	  
-         </div>	   	
+        
+        	<h:form>
+        		<h:commandButton value="Show Employees"  action="#{empControl.getEmployees}" styleClass="myButton"/>
+        	
+        		<corejsf:nav name="Create Employee" outcome="newEmp?faces-redirect=true"/>
+        		
+        		<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton"/>
+
+        		
+        	</h:form>
+       
       </ui:composition>
    </body>
-</html>
+</html> 
