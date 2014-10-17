@@ -256,4 +256,47 @@ public class Timesheet implements java.io.Serializable {
         details.add(new TimesheetRow());
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((endWeek == null) ? 0 : endWeek.hashCode());
+		result = prime * result
+				+ ((flextime == null) ? 0 : flextime.hashCode());
+		result = prime * result
+				+ ((overtime == null) ? 0 : overtime.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Timesheet other = (Timesheet) obj;
+		if (endWeek == null) {
+			if (other.endWeek != null)
+				return false;
+		} else if (!endWeek.equals(other.endWeek))
+			return false;
+		if (flextime == null) {
+			if (other.flextime != null)
+				return false;
+		} else if (!flextime.equals(other.flextime))
+			return false;
+		if (overtime == null) {
+			if (other.overtime != null)
+				return false;
+		} else if (!overtime.equals(other.overtime))
+			return false;
+		return true;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 }
