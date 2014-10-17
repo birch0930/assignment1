@@ -27,6 +27,16 @@ public class EmployeeController implements Serializable {
 	@Inject
 	private EmployeeManager empManager;
 	private List<Employee> empList;
+	@Inject
+	private Employee employee;
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	//@Inject
 	//private Conversation conversation;
 	@Inject
@@ -47,6 +57,7 @@ public class EmployeeController implements Serializable {
 	}
 
 	public void getEmployees() {
+		
 		empList = empManager.getEmployees();
 
 		//return "superShowUser.xhtml";
@@ -58,9 +69,11 @@ public class EmployeeController implements Serializable {
 
 	}
 
-	public String newEmployee(Employee emp) {
-		if (emp != null)
-			empManager.addEmployee(emp);
+	public String newEmployee(int id, String name, String useName, int type) {
+		Employee newEmp = new Employee();
+		//conversation.begin();
+		if (newEmp != null)
+			empManager.addEmployee(newEmp);
 		return "superShowUser";
 	}
 
@@ -87,8 +100,9 @@ public class EmployeeController implements Serializable {
 	public void setCredential(Credentials credential) {
 		this.credential = credential;
 	}
-
+	
 	public String update() {
+		//conversation.end();
 		return "superShowUser";
 	}
 	

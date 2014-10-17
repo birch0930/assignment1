@@ -22,7 +22,18 @@
 		</ui:define>
 		
 		<ui:define name="content">
-		
+		<h:form>	
+			<h:panelGrid columns="2">
+				#{msgs.empNum}<h:inputText value="#{empControl.employee.empNumber}" style="text-align:left" />
+				#{msgs.empName}<h:inputText value="#{empControl.employee.name}" style="text-align:left" />
+				#{msgs.userName}<h:inputText value="#{empControl.employee.userName}" style="text-align:left" />
+				#{msgs.empAuthority}<h:inputText value="#{empControl.employee.type}" style="text-align:left" />
+			</h:panelGrid>
+			<br/>
+			<h:commandButton value="#{msgs.save}"
+			 action="#{empControl.newEmployee(empControl.employee)}"/>
+			<br/>
+		</h:form>
 		
 		</ui:define>
 		
