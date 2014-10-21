@@ -29,7 +29,7 @@ public class TimesheetRow implements java.io.Serializable {
     public static final int FRI = 6;
 
     /** The projectID. */
-    private int projectID;
+    private Integer projectID;
     /** The WorkPackage. Must be a unique for a given projectID. */
     private String workPackage;
 
@@ -44,6 +44,9 @@ public class TimesheetRow implements java.io.Serializable {
     /**
      * Creates a TimesheetDetails object and sets the editable state to true.
      */
+    
+    private BigDecimal sum;
+    
     public TimesheetRow() {
     }
 
@@ -67,16 +70,16 @@ public class TimesheetRow implements java.io.Serializable {
     /**
      * @return the projectID
      */
-    public int getProjectID() {
+    public Integer getProjectID() {
         return projectID;
     }
 
     /**
      * @param id the projectID to set
      */
-    public void setProjectID(final int id) {
-        this.projectID = id;
-    }
+	public void setProjectID(Integer projectID) {
+		this.projectID = projectID;
+	}
 
     /**
      * @return the workPackage
@@ -191,7 +194,7 @@ public class TimesheetRow implements java.io.Serializable {
      * @return the weekly hours
      */
     public BigDecimal getSum() {
-        BigDecimal sum = BigDecimal.ZERO;
+        sum = BigDecimal.ZERO;
         for (BigDecimal next : hoursForWeek) {
             if (next != null) {
                 sum = sum.add(next);
@@ -199,5 +202,11 @@ public class TimesheetRow implements java.io.Serializable {
         }
         return sum;
     }
+
+	public void setSum(BigDecimal sum) {
+		this.sum = sum;
+	}
+
+
 
 }

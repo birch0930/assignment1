@@ -22,87 +22,120 @@
 		</ui:define>
 
 		<ui:define name="content">
-		<h:panelGrid  columns="8">
+			<h:panelGrid columns="8">
 		
-		#{msgs.empNum}: <h:outputText value="#{sheetControl.currentTimesheet.employee.empNumber}" />
-		#{msgs.weekNum}:<h:outputText value="#{sheetControl.currentTimesheet.weekNumber}" />
-		#{msgs.weekEnd}:<h:outputText value="#{sheetControl.currentTimesheet.weekEnding}" />
-		</h:panelGrid>
+		#{msgs.empNum}: <h:outputText
+					value="#{sheetControl.currentTimesheet.employee.empNumber}" />
+		#{msgs.weekNum}:<h:outputText value="#{sheetControl.weekNum}" />
+		#{msgs.weekEnd}:<h:outputText
+					value="#{sheetControl.currentTimesheet.weekEnding}" />
+			</h:panelGrid>
 		
-		#{msgs.empName}:<h:outputText value="#{sheetControl.currentTimesheet.employee.name}" />
-		<h:form>
-			<h:dataTable value="#{sheetControl.currentTimesheet.details}" var="row" id="table" border="1">
-				<h:column>
-					<f:facet name="header">
+		#{msgs.empName}:<h:outputText
+				value="#{sheetControl.currentTimesheet.employee.name}" />
+			<h:form>
+				<h:dataTable value="#{sheetControl.currentTimesheet.details}"
+					var="row" id="table" border="1" styleClass="pure-table">
+					<h:column>
+						<f:facet name="header">
             		#{msgs.formProject}
             	</f:facet>
-            		#{row.projectID}
-            </h:column>
-				<h:column>
-					<f:facet name="header">
+
+						<h:outputText value="#{row.projectID}" size="10" />
+
+
+						<f:facet name="footer">
+
+							<h:commandButton action="#{sheetControl.addRow}"
+								value="#{msgs.newRow}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.formWP}
             	</f:facet>
-            		#{row.workPackage}
-            </h:column>
-            <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.workPackage}" size="10" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.formTotal}
             	</f:facet>
-            		#{row.lastName}
-            </h:column>
-            <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.sum}" size="10" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.sat}
             	</f:facet>
-            		#{row.hoursForWeek[row.SAT]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[0]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.sun}
             	</f:facet>
-            		#{row.hoursForWeek[row.SUN]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[1]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.mon}
             	</f:facet>
-            		#{row.hoursForWeek[row.MON]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[2]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.tue}
             	</f:facet>
-            		#{row.hoursForWeek[row.TUE]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[3]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.wed}
             	</f:facet>
-            		#{row.hoursForWeek[row.WED]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[4]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.thu}
             	</f:facet>
-            		#{row.hoursForWeek[row.THU]}
-            </h:column> <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[5]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.fri}
             	</f:facet>
-            		#{row.hoursForWeek[row.FRI]}
-            </h:column>
-             <h:column>
-					<f:facet name="header">
+						<h:outputText value="#{row.hoursForWeek[6]}" />
+
+					</h:column>
+					<h:column>
+						<f:facet name="header">
             		#{msgs.formNotes}
             	</f:facet>
-            		#{row.notes}
-            </h:column>
-			
-			</h:dataTable>
-		</h:form>
+						<h:outputText value="#{row.notes}" size="12" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+            		
+            	</f:facet>
+						<h:commandLink value="#{msgs.edit}" action="#{sheetControl.editTimesheet}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+            		
+            	</f:facet>
+						<h:commandLink value="#{msgs.del}" action="#{sheetControl.delRow(row)}" />
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+
 
 		</ui:define>
-		
+
 		<ui:define name="footer">
 			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
