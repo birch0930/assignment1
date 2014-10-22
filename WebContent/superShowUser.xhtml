@@ -68,6 +68,16 @@
 						</f:facet>
 						<h:outputText value="#{emp.type}" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.password}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{empControl.credential.password}" rendered="#{emp.editable}"
+									 size="10" />
+						<h:outputText value="#{empControl.credential.password}" rendered="#{not emp.editable}" />
+					</h:column>
 
 					<h:column>
 						<f:facet name="header">
@@ -77,9 +87,18 @@
 						<h:commandButton value="#{msgs.deleteColumn}"
 							action="#{empControl.empManager.deleteEmpoyee(emp)}" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{msgs.changePass}"
+								style="font-weight: bold" />
+						</f:facet>
+						<h:commandButton value="#{msgs.changePass}"
+							action="#{empControl.displayEditEmp}" />
+					</h:column>
 				</h:dataTable>
 				<h:commandButton value="#{msgs.save}" action="#{empControl.update}" />
-				<h:commandButton value="#{msgs.add}" action="newEmp" />
+				<h:commandButton value="#{msgs.add}" action="#{empControl.add}" />
 			</h:form>
 		</ui:define>
 

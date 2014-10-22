@@ -105,15 +105,11 @@ found.
 	public boolean verifyUser(Credentials credential) {
 		Map<String, String> combos = getLoginCombos();
 		if(combos.containsKey(credential.getUserName())){
-			String pw = combos.get(credential.getUserName
-
-());
+			String pw = combos.get(credential.getUserName());
 			if(credential.getPassword().equals(pw)) {
 				employee = getEmployee(credential.getUserName());
 				return true;
 			}
-
-
 			else return false;
 		}
 		return false;
@@ -133,6 +129,9 @@ found.
 	@Override
 	public void addEmployee(Employee newEmployee) {
 		empInfo.add(newEmployee);
+		/*for(Employee emp : empInfo){
+			System.out.println(emp.getName());
+		}*/
 	}
 
 	public Employee getEmployee() {
@@ -141,5 +140,11 @@ found.
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public String changePassword() {
+		
+
+		return "superShowUser";
 	}
 }

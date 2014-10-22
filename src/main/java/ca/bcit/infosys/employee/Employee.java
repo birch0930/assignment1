@@ -21,7 +21,6 @@ public class Employee implements Serializable {
     private int type;
     private boolean editable;
 
-
     public boolean isEditable() {
 		return editable;
 	}
