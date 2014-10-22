@@ -14,7 +14,9 @@
         		<corejsf:nav name="Create Employee" outcome="newEmp?faces-redirect=true"/>
         		
         		<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton"/>
-
+				<h:commandButton value="Current Timesheet"
+					action="#{sheetControl.displayCurrentTimesheet}"
+					styleClass="myButton" />
         		
         	</h:form>
        

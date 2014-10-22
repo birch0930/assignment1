@@ -23,16 +23,16 @@
 		</ui:define>
 
 		<ui:define name="content">
-		
+
 			<h:panelGrid columns="8">
 		
 		#{msgs.empNum}: <h:outputText
 					value="#{sheetControl.currentTimesheet.employee.empNumber}" />
-		#{msgs.weekNum}:<h:outputText value="11" />
-		#{msgs.weekEnd}:<h:outputText
+		#{msgs.weekNum}:<h:inputText value="#{sheetControl.weekNum}" />
+		#{msgs.weekEnd}:<h:inputText
 					value="#{sheetControl.currentTimesheet.endWeek}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
+					<f:convertDateTime pattern="yyyy" />
+				</h:inputText>
 			</h:panelGrid>
 		
 		#{msgs.empName}:<h:outputText
@@ -45,11 +45,11 @@
             		#{msgs.formProject}
             	</f:facet>
 
-						<h:inputText value="#{row.projectID}" size="10" >
-							<f:convertNumber/>
+						<h:inputText value="#{row.projectID}" size="10">
+							<f:convertNumber />
 						</h:inputText>
 						<f:facet name="footer">
-							
+
 							<h:commandButton action="#{sheetControl.addRow}"
 								value="#{msgs.newRow}" />
 						</f:facet>
@@ -70,56 +70,56 @@
 						<f:facet name="header">
             		#{msgs.sat}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[0]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[0]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.sun}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[1]}"
-							 />
 
+						<h:inputText value="#{row.hoursForWeek[1]}" size="2"
+							converter="javax.faces.BigDecimal" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.mon}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[2]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[2]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.tue}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[3]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[3]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.wed}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[4]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[4]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.thu}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[5]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[5]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.fri}
             	</f:facet>
-						<corejsf:timesheetRow value="#{row.hoursForWeek[6]}"
-							 />
+						<h:inputText value="#{row.hoursForWeek[6]}" size="2"
+							converter="javax.faces.BigDecimal" />
 
 					</h:column>
 					<h:column>
@@ -142,5 +142,7 @@
 			<ui:include src="/sections/footer.xhtml" />
 		</ui:define>
 	</ui:composition>
+	
+
 </h:body>
 </html>
