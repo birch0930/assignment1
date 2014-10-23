@@ -104,15 +104,25 @@ public class EmployeeManager implements EmployeeList {
 	@Override
 	public boolean verifyUser(Credentials credential) {
 		Map<String, String> combos = getLoginCombos();
+<<<<<<< HEAD
 		if (combos.containsKey(credential.getUserName())) {
 			String pw = combos.get(credential.getUserName());
 			if (credential.getPassword().equals(pw)) {
+=======
+		if(combos.containsKey(credential.getUserName())){
+			String pw = combos.get(credential.getUserName());
+			if(credential.getPassword().equals(pw)) {
+>>>>>>> branch 'master' of https://github.com/birch0930/assignment1.git
 				employee = getEmployee(credential.getUserName());
 				return true;
 			}
+<<<<<<< HEAD
 
 			else
 				return false;
+=======
+			else return false;
+>>>>>>> branch 'master' of https://github.com/birch0930/assignment1.git
 		}
 		return false;
 	}
@@ -131,6 +141,9 @@ public class EmployeeManager implements EmployeeList {
 	@Override
 	public void addEmployee(Employee newEmployee) {
 		empInfo.add(newEmployee);
+		/*for(Employee emp : empInfo){
+			System.out.println(emp.getName());
+		}*/
 	}
 
 	public Employee getEmployee() {
@@ -139,5 +152,11 @@ public class EmployeeManager implements EmployeeList {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	public String changePassword() {
+		
+
+		return "superShowUser";
 	}
 }
