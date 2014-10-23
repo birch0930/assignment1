@@ -31,7 +31,33 @@ public class EmployeeController implements Serializable {
 	@Inject
 	private Employee employee;
 	private Employee newEmp;
-	//private Map<Employee, String> userList = new HashMap<Employee, String>();
+	private Employee editEmp;
+	public Employee getEditEmp() {
+		return editEmp;
+	}
+
+	public void setEditEmp(Employee editEmp) {
+		this.editEmp = editEmp;
+	}
+
+	private String newPassword;
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	private Map<String, String> credenCombo;
+	public Map<String, String> getCredenCombo() {
+		return credenCombo;
+	}
+
+	public void setCredenCombo(Map<String, String> credenCombo) {
+		this.credenCombo = credenCombo;
+	}
+
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -52,6 +78,7 @@ public class EmployeeController implements Serializable {
 			int type = empManager.getEmployee(credential.getUserName()).getType();
 			if (type == 0){
 				getEmployees();
+				getCredentials();
 				return "superShowUser";
 			}
 			else
@@ -65,6 +92,14 @@ public class EmployeeController implements Serializable {
 		empList = empManager.getEmployees();
 
 		//return "superShowUser.xhtml";
+	}
+	
+	public void getCredentials() {
+		credenCombo = empManager.getLoginCombos();
+		/*for(int i = 0; i < credenCombo.size(); i++){
+			System.out.println(credenCombo.get(key));
+		}*/
+		
 	}
 
 	public void deleteEmployee(Employee emp) {
@@ -127,7 +162,26 @@ public class EmployeeController implements Serializable {
 	}
 	
 	
-	public String displayEditEmp () {
+	public String displayEditEmp (Employee e) {
+		editEmp = e;
+		//System.out.println(editEmp.getUserName());
 		return "changePassword";		
 	}
+	
+
+	public String changePassword(String newPassword) {
+		empManager.getLoginCombos().put(getEditEmp().getUserName(), newPassword);
+		System.out.println(getEditEmp().getUserName());
+		for (Map.Entry<String, String> entry : empManager.getLoginCombos().entrySet())
+		{
+
+		    System.out.println(entry.getKey() + "/" + entry.getValue());
+		}
+		//System.out.println(getEditEmp().getUserName());
+
+		//combo.put(newEmp.getUserName(), newPassword);
+		return "superShowUser";
+	}
+	
+
 }

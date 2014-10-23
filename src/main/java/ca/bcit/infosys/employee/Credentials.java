@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Credentials implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     /** The login ID. */
     private String userName;
     /** The password. */
@@ -22,6 +22,14 @@ public class Credentials implements Serializable {
 
 	public void setEditable(boolean editable) {
 		this.editable = editable;
+	}
+	
+	 public Credentials() {}
+	
+    public Credentials(String userName, String password) {
+		super();
+		this.userName = userName;
+		this.password = password;
 	}
     /**
      * @return the loginID

@@ -144,8 +144,4 @@ public class EmployeeManager implements EmployeeList {
 		this.employee = employee;
 	}
 
-	public String changePassword() {
-
-		return "superShowUser";
-	}
 }
