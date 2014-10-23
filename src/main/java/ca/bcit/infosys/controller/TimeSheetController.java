@@ -3,15 +3,18 @@ package ca.bcit.infosys.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ca.bcit.infosys.access.EmployeeManager;
 import ca.bcit.infosys.access.TimesheetManager;
 import ca.bcit.infosys.employee.Employee;
 import ca.bcit.infosys.timesheet.Timesheet;
@@ -26,24 +29,33 @@ import ca.bcit.infosys.timesheet.TimesheetRow;
  *
  */
 @Named("sheetControl")
-@SessionScoped
+@ConversationScoped
 public class TimeSheetController implements Serializable, TimesheetCollection {
 
 	@Inject
 	private EmployeeController empControl;
 	@Inject
+	private EmployeeManager employeeManager;
+	@Inject
 	private Timesheet currentTimesheet;
 	@Inject
 	private TimesheetManager timesheetManager;
 	private List<Timesheet> timesheetList;
-	private Integer weekNum;
-	private Integer year;
-	private Employee currentEmp;
+	private Employee employee;
+	static private String userName;
 	@Inject
 	private Conversation conversation;
 
 	public TimeSheetController() {
 
+	}
+
+	private void init() {
+		System.out.println("@PostConstruct");
+		if (userName != null && !userName.equals("")) {			
+			employee = employeeManager.getEmployee(userName);
+			currentTimesheet = getCurrentTimesheet(employee);
+		}
 	}
 
 	@Override
@@ -57,25 +69,32 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		timesheetList = getTimesheets();
 		if (timesheetList == null)
 			return null;
+		List<Timesheet> temp = new ArrayList<Timesheet>();
 		for (Timesheet timesheet : timesheetList) {
 			if (!timesheet.getEmployee().equals(e))
-				timesheetList.remove(timesheet);
+				temp.add(timesheet);
 		}
+		timesheetList.removeAll(temp);
 		return timesheetList;
 	}
 
 	public String displayCurrentTimesheet() {
-		if (timesheetList != null) {
-			this.currentTimesheet = timesheetList.get(timesheetList.size() - 1);
-			return "displayTimesheet.xhtml";
-		}
-		else {
+		// if (!conversation.isTransient())
+		// conversation.end();
+		init();
+		currentTimesheet = getCurrentTimesheet(employee);
+		if (currentTimesheet == null) {
 			return this.addTimesheet();
-		} 
+		}
+		// System.out.println(timesheetList.size());
+		// this.currentTimesheet =timesheetList.get(timesheetList.size()-1);
+		return "displayTimesheet";
 	}
 
 	@Override
 	public Timesheet getCurrentTimesheet(Employee e) {
+		
+		employee = employeeManager.getEmployee(userName);
 		timesheetList = getTimesheets(e);
 		if (timesheetList == null)
 			return null;
@@ -92,30 +111,44 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 
 	@Override
 	public String addTimesheet() {
-		// conversation.begin();
-		//Calendar c = new GregorianCalendar();
-        
-		currentTimesheet = new Timesheet();
-		weekNum = currentTimesheet.getWeekNumber();
-		//year = c.get(Calendar.YEAR);
-		currentTimesheet.setEmployee(empControl.getCurrentEmployee());
+		if (conversation.isTransient())
+			conversation.begin();
+		employee = employeeManager.getEmployee(userName);
+			currentTimesheet = new Timesheet();
+			currentTimesheet.setEmployee(employee);
+		
 		return "newTimesheet.xhtml";
 	}
 
-	public String addRow() {
-
+	public void addRow() {
+		init();
+		System.out.println(userName);
 		currentTimesheet.addRow();
+		timesheetManager.update(currentTimesheet);
+	}
 
+	public String editTimesheet(TimesheetRow row) {
+		System.out.println(row.isEditable());
+		init();
+		row.setEditable(true);
+		timesheetManager.update(currentTimesheet);
 		return "";
 	}
 
-	public String editTimesheet() {
-
+	public String updateTimesheet() {
+		init();
+		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
+			if (timesheetRow.isEditable())
+				timesheetRow.setEditable(false);
+		}
+		timesheetManager.update(currentTimesheet);
 		return "displayTimesheet.xhtml";
 	}
 
 	public String delRow(TimesheetRow Row) {
+		init();
 		currentTimesheet.deleteRow(Row);
+		timesheetManager.update(currentTimesheet);
 		return "displayTimesheet.xhtml";
 	}
 
@@ -128,11 +161,17 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 					|| timesheetRow.getWorkPackage().equals(""))
 				list.add(timesheetRow);
 		}
-		currentTimesheet.setWeekNumber(weekNum, year);
+
 		currentTimesheet.getDetails().removeAll(list);
+
+		// currentTimesheet.setWeekNumber(weekNum, year);
 		timesheetManager.add(currentTimesheet);
-		// if (conversation != null)
-		// conversation.end();
+	
+		for (Timesheet timesheetRow : timesheetManager.getTimesheets()) {
+			System.out.println(timesheetRow.toString());
+		}
+		if (!conversation.isTransient())
+			conversation.end();
 		return "displayTimesheet.xhtml";
 	}
 
@@ -160,14 +199,6 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		this.timesheetManager = timesheetManager;
 	}
 
-	public List<Timesheet> getTimesheetList() {
-		return timesheetList;
-	}
-
-	public void setTimesheetList(List<Timesheet> timesheetList) {
-		this.timesheetList = timesheetList;
-	}
-
 	public Conversation getConversation() {
 		return conversation;
 	}
@@ -176,28 +207,36 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		this.conversation = conversation;
 	}
 
-	public Integer getWeekNum() {
-		return weekNum;
+	public EmployeeManager getEmployeeManager() {
+		return employeeManager;
 	}
 
-	public void setWeekNum(Integer weekNum) {
-		this.weekNum = weekNum;
+	public void setEmployeeManager(EmployeeManager employeeManager) {
+		this.employeeManager = employeeManager;
 	}
 
-	public Integer getYear() {
-		return year;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setYear(Integer year) {
-		this.year = year;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public Employee getCurrentEmp() {
-		return currentEmp;
+	public List<Timesheet> getTimesheetList() {
+		return timesheetList;
 	}
 
-	public void setCurrentEmp(Employee currentEmp) {
-		this.currentEmp = empControl.getCurrentEmployee();
+	public void setTimesheetList(List<Timesheet> timesheetList) {
+		this.timesheetList = timesheetList;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 }

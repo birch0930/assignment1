@@ -1,9 +1,10 @@
 package ca.bcit.infosys.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
@@ -29,6 +30,8 @@ public class EmployeeController implements Serializable {
 	private List<Employee> empList;
 	@Inject
 	private Employee employee;
+	private Employee newEmp;
+	//private Map<Employee, String> userList = new HashMap<Employee, String>();
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -67,14 +70,16 @@ public class EmployeeController implements Serializable {
 	public void deleteEmployee(Employee emp) {
 		if (emp != null)
 			empManager.deleteEmpoyee(emp);
-
 	}
 
-	public String newEmployee(int id, String name, String useName, int type) {
-		Employee newEmp = new Employee();
+	public String newEmployee() {
 		//conversation.begin();
-		if (newEmp != null)
+		if (employee != null)
+			newEmp = new Employee(employee.getName(),employee.getEmpNumber(),employee.getUserName(),employee.getType());
 			empManager.addEmployee(newEmp);
+
+		//getEmployees();
+		//conversation.end();
 		return "superShowUser";
 	}
 
@@ -116,4 +121,13 @@ public class EmployeeController implements Serializable {
 		this.currentEmployee = currentEmployee;
 	}
 	
+	public String add(){
+		//conversation.begin();
+		return "newEmp";
+	}
+	
+	
+	public String displayEditEmp () {
+		return "changePassword";		
+	}
 }

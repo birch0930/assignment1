@@ -132,3 +132,56 @@
 	position:relative;
 	top:1px;
 }
+
+.mxl{width:80%;}   // 定义表格整体样式：宽度
+   //  以下定义每列的样式
+.list-column1-center{
+text-align: center;
+  width: 12%;
+}
+.list-column2-center {
+  text-align: center;
+  width: 12%;
+}
+.list-column3-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column4-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column5-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column6-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column7-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column8-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column9-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column10-center {
+  text-align: center;
+  width: 8%;
+}
+.list-column11-center {
+  text-align: center;
+  width: 12%;
+}
+.list-column12-center {
+  text-align: center;
+  width: 8%;
+}.list-column13-center {
+  text-align: center;
+  width: 8%;

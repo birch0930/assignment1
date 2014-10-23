@@ -13,6 +13,16 @@ public class Credentials implements Serializable {
     private String userName;
     /** The password. */
     private String password;
+    
+    private boolean editable;
+
+    public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
     /**
      * @return the loginID
      */

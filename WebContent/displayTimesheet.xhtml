@@ -26,24 +26,39 @@
 		
 		#{msgs.empNum}: <h:outputText
 					value="#{sheetControl.currentTimesheet.employee.empNumber}" />
-		#{msgs.weekNum}:<h:outputText value="#{sheetControl.weekNum}" />
+		#{msgs.weekNum}:<h:outputText
+					value="#{sheetControl.currentTimesheet.weekNumber}" />
 		#{msgs.weekEnd}:<h:outputText
-					value="#{sheetControl.currentTimesheet.weekEnding}" />
+					value="#{sheetControl.currentTimesheet.weekEnding}"  />
 			</h:panelGrid>
 		
 		#{msgs.empName}:<h:outputText
 				value="#{sheetControl.currentTimesheet.employee.name}" />
-			<h:form>
-				<h:dataTable value="#{sheetControl.currentTimesheet.details}"
-					var="row" id="table" border="1" styleClass="pure-table">
+				<br/>
+			
+				
+			<h:form >
+				<h:commandButton action="#{sheetControl.addRow}"
+								value="#{msgs.newRow}" rendered="#{empty sheetControl.currentTimesheet.details  }" />
+				
+				<h:dataTable value="#{sheetControl.currentTimesheet.details}"  rendered="#{ not empty sheetControl.currentTimesheet.details }"
+					var="row" id="table" border="1" styleClass="mxl"
+					columnClasses="list-column1-center,list-column2-center,list-column3-center,
+                                                            list-column4-center,list-column5-center,
+                                                            list-column6-center,list-column7-center,
+                                                            list-column8-center,list-column9-center,
+                                                            list-column10-center,list-column11-center,
+                                                            list-column12-center,list-column13-center">
 					<h:column>
 						<f:facet name="header">
             		#{msgs.formProject}
             	</f:facet>
 
-						<h:outputText value="#{row.projectID}" size="10" />
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.projectID}" size="10" />
 
-
+						<h:inputText rendered="#{row.editable}" value="#{row.projectID}"
+							size="10" />
 						<f:facet name="footer">
 
 							<h:commandButton action="#{sheetControl.addRow}"
@@ -54,83 +69,106 @@
 						<f:facet name="header">
             		#{msgs.formWP}
             	</f:facet>
-						<h:outputText value="#{row.workPackage}" size="10" />
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.workPackage}" size="10" />
+						<h:inputText rendered="#{row.editable}" value="#{row.workPackage}"
+							size="10" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.formTotal}
             	</f:facet>
-						<h:outputText value="#{row.sum}" size="10" />
+						<h:outputText value="#{row.sum}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.sat}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[0]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[0]}" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[0]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.sun}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[1]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[1]}" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[1]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.mon}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[2]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[2]}" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[2]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.tue}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[3]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[3]}" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[3]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.wed}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[4]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[4]}" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[4]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.thu}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[5]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[5]}" size="5" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[5]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.fri}
             	</f:facet>
-						<h:outputText value="#{row.hoursForWeek[6]}" />
-
+						<h:outputText rendered="#{not row.editable}"
+							value="#{row.hoursForWeek[6]}" size="5" />
+						<h:inputText rendered="#{row.editable}"
+							value="#{row.hoursForWeek[6]}" size="5" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
             		#{msgs.formNotes}
             	</f:facet>
-						<h:outputText value="#{row.notes}" size="12" />
+						<h:outputText rendered="#{not row.editable}" value="#{row.notes}"
+							size="12" />
+						<h:inputText rendered="#{row.editable}" value="#{row.notes}"
+							size="12" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-            		
-            	</f:facet>
-						<h:commandLink value="#{msgs.edit}" action="#{sheetControl.editTimesheet}" />
-					</h:column>
+								#{msgs.action}
+						</f:facet>
+						<h:commandLink value="#{msgs.edit}"
+							action="#{sheetControl.editTimesheet(row)}" />
+							</h:column>
 					<h:column>
-						<f:facet name="header">
-            		
-            	</f:facet>
-						<h:commandLink value="#{msgs.del}" action="#{sheetControl.delRow(row)}" />
+						<h:commandLink value="#{msgs.del}"
+							action="#{sheetControl.delRow(row)}" />
 					</h:column>
-
+					
 				</h:dataTable>
+				
+		
+				<h:commandButton action="#{sheetControl.updateTimesheet}"
+					value="Update" />
 			</h:form>
 
 

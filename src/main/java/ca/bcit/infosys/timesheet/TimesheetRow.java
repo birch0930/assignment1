@@ -32,7 +32,7 @@ public class TimesheetRow implements java.io.Serializable {
     private Integer projectID;
     /** The WorkPackage. Must be a unique for a given projectID. */
     private String workPackage;
-
+    private boolean editable;
     /**
      * An array holding all the hours charged for each day of the week. Day 0 is
      * Saturday, ... day 6 is Friday
@@ -48,6 +48,7 @@ public class TimesheetRow implements java.io.Serializable {
     private BigDecimal sum;
     
     public TimesheetRow() {
+    	
     }
 
     /**
@@ -205,6 +206,14 @@ public class TimesheetRow implements java.io.Serializable {
 
 	public void setSum(BigDecimal sum) {
 		this.sum = sum;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
 	}
 
 

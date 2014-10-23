@@ -23,21 +23,21 @@
 		</ui:define>
 
 		<ui:define name="content">
-
+		<h:form>
 			<h:panelGrid columns="8">
 		
 		#{msgs.empNum}: <h:outputText
 					value="#{sheetControl.currentTimesheet.employee.empNumber}" />
-		#{msgs.weekNum}:<h:inputText value="#{sheetControl.weekNum}" />
+		#{msgs.weekNum}:<h:inputText value="#{sheetControl.currentTimesheet.weekNumber}" />
 		#{msgs.weekEnd}:<h:inputText
 					value="#{sheetControl.currentTimesheet.endWeek}">
-					<f:convertDateTime pattern="yyyy" />
+					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
 			</h:panelGrid>
 		
 		#{msgs.empName}:<h:outputText
 				value="#{sheetControl.currentTimesheet.employee.name}" />
-			<h:form>
+			
 				<h:dataTable value="#{sheetControl.currentTimesheet.details}"
 					var="row" id="table" border="1">
 					<h:column>

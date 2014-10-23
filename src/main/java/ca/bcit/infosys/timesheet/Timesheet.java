@@ -27,7 +27,8 @@ public class Timesheet implements java.io.Serializable {
     private BigDecimal overtime;
     /** The total number of flextime hours on the timesheet. */
     private BigDecimal flextime;
-
+    
+    private int weekNumber;
     /** Number of days in a week. */
     public static final int DAYS_IN_WEEK = 7;
 
@@ -61,6 +62,8 @@ public class Timesheet implements java.io.Serializable {
         c.add(Calendar.DATE, leftDays);
         endWeek = c.getTime();
     }
+    
+  
 
     /**
      * Creates a Timesheet object with all fields set. Used to create sample
@@ -115,7 +118,8 @@ public class Timesheet implements java.io.Serializable {
         Calendar c = new GregorianCalendar();
         c.setTime(endWeek);
         c.setFirstDayOfWeek(Calendar.SATURDAY);
-        return c.get(Calendar.WEEK_OF_YEAR);
+        weekNumber =c.get(Calendar.WEEK_OF_YEAR);
+        return weekNumber;
     }
 
     /**
@@ -297,6 +301,19 @@ public class Timesheet implements java.io.Serializable {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public void setWeekNumber(int weekNumber) {
+		this.weekNumber = weekNumber;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Timesheet [employee=" + employee + ", endWeek=" + endWeek
+				+ ", details=" + details + ", overtime=" + overtime
+				+ ", flextime=" + flextime + ", weekNumber=" + weekNumber + "]";
 	}
 
 }
