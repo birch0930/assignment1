@@ -14,17 +14,7 @@ public class Credentials implements Serializable {
     /** The password. */
     private String password;
     
-    private boolean editable;
-
-    public boolean isEditable() {
-		return editable;
-	}
-
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}
-	
-	 public Credentials() {}
+	public Credentials() {}
 	
     public Credentials(String userName, String password) {
 		super();

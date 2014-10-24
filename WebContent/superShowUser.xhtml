@@ -68,16 +68,6 @@
 						</f:facet>
 						<h:outputText value="#{emp.type}" />
 					</h:column>
-					
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{msgs.password}"
-								style="font-weight: bold" />
-						</f:facet>
-						<h:inputText value="#{empControl.credential.password}" rendered="#{emp.editable}"
-									 size="10" />
-						<h:outputText value="#{empControl.credential.password}" rendered="#{not emp.editable}" />
-					</h:column>
 
 					<h:column>
 						<f:facet name="header">
