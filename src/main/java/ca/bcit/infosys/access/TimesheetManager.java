@@ -3,11 +3,13 @@ package ca.bcit.infosys.access;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.enterprise.context.SessionScoped;
-
 import ca.bcit.infosys.timesheet.Timesheet;
 
+/**
+ * 
+ * @author Huanan
+ *
+ */
 
 
 public class TimesheetManager implements java.io.Serializable{

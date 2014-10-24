@@ -87,6 +87,12 @@ public class EmployeeController implements Serializable {
 			return "failure";
 	}
 
+	
+	public String logout() {
+		empManager.logout(currentEmployee);
+		credential = new Credentials();
+		return "login";
+	}
 	public void getEmployees() {
 		
 		empList = empManager.getEmployees();

@@ -61,6 +61,7 @@ public class Timesheet implements java.io.Serializable,Comparable {
         int leftDays = Calendar.FRIDAY - currentDay;
         c.add(Calendar.DATE, leftDays);
         endWeek = c.getTime();
+        checkFriday(endWeek);
     }
     
   
@@ -99,8 +100,6 @@ public class Timesheet implements java.io.Serializable,Comparable {
         Calendar c = new GregorianCalendar();
         c.setTime(end);
         int currentDay = c.get(Calendar.DAY_OF_WEEK);
-        System.out.println(currentDay);
-        System.out.println(Calendar.FRIDAY);
         if (currentDay != Calendar.FRIDAY) {
             throw new IllegalArgumentException("EndWeek must be a Friday");
         }
@@ -110,6 +109,7 @@ public class Timesheet implements java.io.Serializable,Comparable {
      * @param end the endWeek to set. Must be a Friday
      */
     public void setEndWeek(final Date end) {
+    	
         checkFriday(end);
         endWeek = end;
     }

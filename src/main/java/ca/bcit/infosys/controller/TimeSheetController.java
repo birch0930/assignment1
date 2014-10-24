@@ -23,10 +23,8 @@ import ca.bcit.infosys.timesheet.TimesheetCollection;
 import ca.bcit.infosys.timesheet.TimesheetRow;
 
 /**
- * Resources to display categories and choose one.
  * 
- * @author blink
- * @version 1
+ * @author Huanan
  *
  */
 @Named("sheetControl")
@@ -41,25 +39,21 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	private Timesheet currentTimesheet;
 	@Inject
 	private TimesheetManager timesheetManager;
-	// @Inject
 	private List<Timesheet> timesheetList;
-	// @Inject
 	private Employee employee;
 	static private String userName;
 
-	// @Inject
-	// private Conversation conversation;
 
 	public TimeSheetController() {
 
 	}
-
-	private void init() {
-		if (userName != null && !userName.equals("")) {
-			employee = employeeManager.getEmployee(userName);
-			currentTimesheet = getCurrentTimesheet(employee);
-		}
-	}
+//
+//	private void init() {
+//		if (userName != null && !userName.equals("")) {
+//			employee = employeeManager.getEmployee(userName);
+//			currentTimesheet = getCurrentTimesheet(employee);
+//		}
+//	}
 
 	@Override
 	public List<Timesheet> getTimesheets() {
@@ -82,15 +76,11 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public String displayCurrentTimesheet() {
-		// if (!conversation.isTransient())
-		// conversation.end();
-		// init();
+
 		currentTimesheet = getCurrentTimesheet(employee);
 		if (currentTimesheet == null) {
 			return this.addTimesheet();
 		}
-		// System.out.println(timesheetList.size());
-		// this.currentTimesheet =timesheetList.get(timesheetList.size()-1);
 		return "displayTimesheet";
 	}
 
@@ -99,24 +89,15 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 
 		employee = employeeManager.getEmployee(userName);
 		timesheetList = getTimesheets(e);
-		if (timesheetList == null || timesheetList.size()==0)
+		if (timesheetList == null || timesheetList.size() == 0)
 			return null;
 		return timesheetList.get(timesheetList.size() - 1);
-		// Calendar c = new GregorianCalendar();
-		//
-		// for (Timesheet timesheet : timesheetList) {
-		// if (c.get(Calendar.WEEK_OF_YEAR) == timesheet.getWeekNumber())
-		// return timesheet;
-		// else
-		// return null;
-		// }
-		// return null;
+
 	}
 
 	@Override
 	public String addTimesheet() {
-		// if (conversation.isTransient())
-		// conversation.begin();
+
 		employee = employeeManager.getEmployee(userName);
 		currentTimesheet = new Timesheet();
 		currentTimesheet.setEmployee(employee);
@@ -125,7 +106,7 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public void addRow() {
-		// init();
+
 		System.out.println(userName);
 		currentTimesheet.addRow();
 		timesheetManager.update(currentTimesheet);
@@ -133,9 +114,7 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public String previous() {
-		// init();
-		int weekNum = currentTimesheet.getWeekNumber();
-		System.out.println("previous" + timesheetList.size());
+		
 		int index = timesheetList.indexOf(currentTimesheet);
 		index--;
 		if (index >= 0) {
@@ -143,23 +122,11 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 			if (nt != null)
 				currentTimesheet = nt;
 		}
-		// for (Timesheet timesheet : timesheetList) {
-		// if (timesheet.getWeekNumber() == --weekNum){
-		// currentTimesheet = timesheet;
-		// return "";
-		// }
-		// if (timesheet.getWeekNumber() < weekNum)
-		// currentTimesheet = timesheet;
-		// }
 
 		return "";
 	}
 
 	public String nextTimesheet() {
-		// init();
-		int weekNum = currentTimesheet.getWeekNumber();
-		System.out.println("next" + timesheetList.size());
-
 		int index = timesheetList.indexOf(currentTimesheet);
 		index++;
 		if (index < timesheetList.size()) {
@@ -167,27 +134,19 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 			if (nt != null)
 				currentTimesheet = nt;
 		}
-		// for (Timesheet timesheet : timesheetList) {
-		// if (timesheet.getWeekNumber() == ++weekNum){
-		// currentTimesheet = timesheet;
-		// return "";
-		// }
-		// if (timesheet.getWeekNumber() > weekNum)
-		// currentTimesheet = timesheet;
-		// }
+
 		return "";
 	}
 
 	public String editTimesheet(TimesheetRow row) {
-		// System.out.println(row.isEditable());
-		init();
 		row.setEditable(true);
 		timesheetManager.update(currentTimesheet);
+		timesheetList = getTimesheets(currentTimesheet.getEmployee());
 		return "";
 	}
 
 	public String updateTimesheet() {
-		// init();
+
 		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
 			if (timesheetRow.isEditable())
 				timesheetRow.setEditable(false);
@@ -198,7 +157,7 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public String delRow(TimesheetRow Row) {
-		// init();
+
 		currentTimesheet.deleteRow(Row);
 		timesheetManager.update(currentTimesheet);
 		timesheetList = getTimesheets(currentTimesheet.getEmployee());
@@ -214,15 +173,11 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 					|| timesheetRow.getWorkPackage().equals(""))
 				list.add(timesheetRow);
 		}
-
+		System.out.println(currentTimesheet.getEndWeek().toString());
 		currentTimesheet.getDetails().removeAll(list);
-
-		// currentTimesheet.setWeekNumber(weekNum, year);
-
 		timesheetManager.add(currentTimesheet);
 		timesheetList = getTimesheets(currentTimesheet.getEmployee());
-		// if (!conversation.isTransient())
-		// conversation.end();
+
 		return "displayTimesheet";
 	}
 
@@ -250,13 +205,6 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		this.timesheetManager = timesheetManager;
 	}
 
-	// public Conversation getConversation() {
-	// return conversation;
-	// }
-	//
-	// public void setConversation(Conversation conversation) {
-	// this.conversation = conversation;
-	// }
 
 	public EmployeeManager getEmployeeManager() {
 		return employeeManager;
