@@ -14,7 +14,7 @@ import ca.bcit.infosys.employee.Employee;
  *
  * @author Bruce Link
  */
-public class Timesheet implements java.io.Serializable {
+public class Timesheet implements java.io.Serializable,Comparable {
     /** Serial version number. */
     private static final long serialVersionUID = 2L;
     /** The user associated with this timesheet. */
@@ -78,6 +78,7 @@ public class Timesheet implements java.io.Serializable {
         checkFriday(end);
         endWeek = end;
         details = charges;
+        getWeekNumber();
     }
 
     /**
@@ -98,6 +99,8 @@ public class Timesheet implements java.io.Serializable {
         Calendar c = new GregorianCalendar();
         c.setTime(end);
         int currentDay = c.get(Calendar.DAY_OF_WEEK);
+        System.out.println(currentDay);
+        System.out.println(Calendar.FRIDAY);
         if (currentDay != Calendar.FRIDAY) {
             throw new IllegalArgumentException("EndWeek must be a Friday");
         }
@@ -315,5 +318,19 @@ public class Timesheet implements java.io.Serializable {
 				+ ", details=" + details + ", overtime=" + overtime
 				+ ", flextime=" + flextime + ", weekNumber=" + weekNumber + "]";
 	}
+
+
+
+	@Override
+	public int compareTo(Object o) {
+		if(o instanceof Timesheet){
+			Timesheet t = (Timesheet)o;
+			if(this.getWeekNumber()<t.getWeekNumber()) return -1;
+			if(this.getWeekNumber()>t.getWeekNumber()) return 1;
+		}
+		return 0;
+	}
+	
+	
 
 }

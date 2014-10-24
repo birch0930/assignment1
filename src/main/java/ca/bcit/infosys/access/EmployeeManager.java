@@ -37,10 +37,10 @@ public class EmployeeManager implements EmployeeList {
 	private static ArrayList<Employee> empInfo = new
 
 	ArrayList<Employee>(Arrays.asList(new Employee("user1", 1, "u1", 0),
-			new Employee("user2", 1, "u2", 1),
-			new Employee("user3", 1, "u3", 1),
-			new Employee("user4", 1, "u4", 1),
-			new Employee("user5", 1, "u5", 1)));
+			new Employee("user2", 2, "u2", 1),
+			new Employee("user3", 3, "u3", 1),
+			new Employee("user4", 4, "u4", 1),
+			new Employee("user5", 5, "u5", 1)));
 
 	/**
 	 * Return Employee table for all Employees.

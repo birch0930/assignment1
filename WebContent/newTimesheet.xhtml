@@ -30,9 +30,10 @@
 					value="#{sheetControl.currentTimesheet.employee.empNumber}" />
 		#{msgs.weekNum}:<h:inputText value="#{sheetControl.currentTimesheet.weekNumber}" />
 		#{msgs.weekEnd}:<h:inputText
-					value="#{sheetControl.currentTimesheet.endWeek}">
+					value="#{sheetControl.currentTimesheet.endWeek}" id="endWeek">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
+				<h:message for="endWeek"/>
 			</h:panelGrid>
 		
 		#{msgs.empName}:<h:outputText

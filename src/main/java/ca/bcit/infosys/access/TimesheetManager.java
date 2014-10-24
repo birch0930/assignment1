@@ -1,11 +1,14 @@
 package ca.bcit.infosys.access;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
+import javax.enterprise.context.SessionScoped;
 
 import ca.bcit.infosys.timesheet.Timesheet;
+
+
 
 public class TimesheetManager implements java.io.Serializable{
 	
@@ -15,7 +18,6 @@ public class TimesheetManager implements java.io.Serializable{
 	
 	
 	public TimesheetManager() {
-		System.out.println("TimesheetManager");
 	}
 
 	public void add(Timesheet timesheet){
@@ -30,7 +32,11 @@ public class TimesheetManager implements java.io.Serializable{
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	public List<Timesheet> getTimesheets() {
+		
+		Collections.sort(timesheetList);
+
 		return timesheetList;
 	}
 

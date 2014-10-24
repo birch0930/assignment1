@@ -10,15 +10,13 @@
       <ui:composition>    
         
         	<h:form>
-        		<h:commandButton value="Show Employees"  action="#{empControl.getEmployees}" styleClass="myButton"/>
-        	
-        		<corejsf:nav name="Create Employee" outcome="newEmp?faces-redirect=true"/>
         		
-        		<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton">
-        			<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
-        		</h:commandButton>
+        	<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton" />
 				<h:commandButton value="Current Timesheet"
 					action="#{sheetControl.displayCurrentTimesheet}"
+					styleClass="myButton" />
+				<h:commandButton value="Logout"
+					action="#{empControl.logout}"
 					styleClass="myButton" />
         		
         	</h:form>

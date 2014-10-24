@@ -22,6 +22,8 @@
 		</ui:define>
 
 		<ui:define name="content">
+
+
 			<h:panelGrid columns="8">
 		
 		#{msgs.empNum}: <h:outputText
@@ -29,19 +31,21 @@
 		#{msgs.weekNum}:<h:outputText
 					value="#{sheetControl.currentTimesheet.weekNumber}" />
 		#{msgs.weekEnd}:<h:outputText
-					value="#{sheetControl.currentTimesheet.weekEnding}"  />
+					value="#{sheetControl.currentTimesheet.weekEnding}" />
 			</h:panelGrid>
 		
 		#{msgs.empName}:<h:outputText
 				value="#{sheetControl.currentTimesheet.employee.name}" />
-				<br/>
+			<br />
+
+
+			<h:form>
+				<h:commandLink value="#{msgs.pre}" action="#{sheetControl.previous}" style="margin-right:65%"/>
 			
-				
-			<h:form >
-				<h:commandButton action="#{sheetControl.addRow}"
-								value="#{msgs.newRow}" rendered="#{empty sheetControl.currentTimesheet.details  }" />
-				
-				<h:dataTable value="#{sheetControl.currentTimesheet.details}"  rendered="#{ not empty sheetControl.currentTimesheet.details }"
+				<h:commandLink value="#{msgs.next}"
+					action="#{sheetControl.nextTimesheet}" />
+				<h:dataTable value="#{sheetControl.currentTimesheet.details}"
+					rendered="#{ not empty sheetControl.currentTimesheet.details }"
 					var="row" id="table" border="1" styleClass="mxl"
 					columnClasses="list-column1-center,list-column2-center,list-column3-center,
                                                             list-column4-center,list-column5-center,
@@ -158,15 +162,15 @@
 						</f:facet>
 						<h:commandLink value="#{msgs.edit}"
 							action="#{sheetControl.editTimesheet(row)}" />
-							</h:column>
+					</h:column>
 					<h:column>
 						<h:commandLink value="#{msgs.del}"
 							action="#{sheetControl.delRow(row)}" />
 					</h:column>
-					
+
 				</h:dataTable>
-				
-		
+
+
 				<h:commandButton action="#{sheetControl.updateTimesheet}"
 					value="Update" />
 			</h:form>
