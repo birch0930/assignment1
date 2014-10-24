@@ -10,16 +10,19 @@
       <ui:composition>    
         
         	<h:form>
-        		<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton">
+        		<h:commandButton value="#{msgs.newTimesheet}"  action="#{sheetControl.addTimesheet}" styleClass="myButton">
 -        			<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
 -        		</h:commandButton>
-				<h:commandButton value="Current Timesheet"
+				<h:commandButton value="#{msgs.currentTimesheet}"
 					action="#{sheetControl.displayCurrentTimesheet}"
 					styleClass="myButton" >
 					<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
 				</h:commandButton>
+				
+				<h:commandButton value="#{msgs.logout}"
+					action="#{empControl.empManager.logout(empControl.currentEmployee)}"
 				<h:commandButton value="Logout"
-					action="#{empControl.logout}"
+					action="#{empControl.empManager.logout(empControl.currentEmployee)}"
 					styleClass="myButton" />
         		
         	</h:form>
