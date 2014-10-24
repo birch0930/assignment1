@@ -180,6 +180,8 @@ public class EmployeeController implements Serializable {
 
 		return "superShowUser";
 	}
-	
-
+		
+	public String goBack() {
+		return "login";
+	}
 }
