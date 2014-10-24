@@ -99,7 +99,7 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 
 		employee = employeeManager.getEmployee(userName);
 		timesheetList = getTimesheets(e);
-		if (timesheetList == null)
+		if (timesheetList == null || timesheetList.size()==0)
 			return null;
 		return timesheetList.get(timesheetList.size() - 1);
 		// Calendar c = new GregorianCalendar();

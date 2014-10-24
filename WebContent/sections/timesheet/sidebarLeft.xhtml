@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:corejsf="http://corejsf.com/facelets">
+	xmlns:corejsf="http://corejsf.com/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <title>IGNORED</title>
 </head>
@@ -12,10 +13,14 @@
 		<div>
 			<h:form>
 			
-				<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton" />
+				<h:commandButton value="New Timesheet"  action="#{sheetControl.addTimesheet}" styleClass="myButton">
+-        			<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
+-        		</h:commandButton>
 				<h:commandButton value="Current Timesheet"
 					action="#{sheetControl.displayCurrentTimesheet}"
-					styleClass="myButton" />
+					styleClass="myButton" >
+					<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
+				</h:commandButton>
 				<h:commandButton value="Logout"
 					action="#{empControl.logout}"
 					styleClass="myButton" />
