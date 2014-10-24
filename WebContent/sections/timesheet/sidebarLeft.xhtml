@@ -22,7 +22,7 @@
 					<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
 				</h:commandButton>
 				<h:commandButton value="Logout"
-					action="#{empControl.logout}"
+					action="#{empControl.empManager.logout(empControl.currentEmployee)}"
 					styleClass="myButton" />
 				
 			</h:form>

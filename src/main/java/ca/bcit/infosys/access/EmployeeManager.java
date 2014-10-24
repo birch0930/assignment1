@@ -123,7 +123,7 @@ public class EmployeeManager implements EmployeeList {
 	@Override
 	public String logout(Employee employee) {
 		this.employee = null;
-		return null;
+		return "login";
 	}
 
 	@Override
