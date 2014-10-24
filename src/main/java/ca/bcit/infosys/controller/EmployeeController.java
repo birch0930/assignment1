@@ -171,16 +171,14 @@ public class EmployeeController implements Serializable {
 
 	public String changePassword(String newPassword) {
 		empManager.getLoginCombos().put(getEditEmp().getUserName(), newPassword);
-		System.out.println(getEditEmp().getUserName());
+		/*System.out.println(getEditEmp().getUserName());
 		for (Map.Entry<String, String> entry : empManager.getLoginCombos().entrySet())
 		{
 
 		    System.out.println(entry.getKey() + "/" + entry.getValue());
 		}
-		//System.out.println(getEditEmp().getUserName());
 
-		//combo.put(newEmp.getUserName(), newPassword);
-		return "superShowUser";
+		return "superShowUser";*/
 	}
 	
 

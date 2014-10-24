@@ -77,15 +77,18 @@ public class EmployeeManager implements EmployeeList {
 		return null;
 	}
 
-	@Override
-	public Map<String, String> getLoginCombos() {
-		Map<String, String> combos = null;
-		combos = new HashMap<String, String>();
+	private static Map<String, String> combos = new HashMap<String, String>();
+	{
 		combos.put("u1", "aaa");
 		combos.put("u2", "bbb");
 		combos.put("u3", "ccc");
 		combos.put("u4", "ddd");
 		combos.put("u5", "eee");
+	}
+
+	
+	@Override
+	public Map<String, String> getLoginCombos() {
 
 		return combos;
 	}
