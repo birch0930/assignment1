@@ -146,7 +146,7 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public String updateTimesheet() {
-
+		checkEmptyRow();
 		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
 			if (timesheetRow.isEditable())
 				timesheetRow.setEditable(false);
@@ -156,6 +156,8 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return "displayTimesheet.xhtml";
 	}
 
+	
+	
 	public String delRow(TimesheetRow Row) {
 
 		currentTimesheet.deleteRow(Row);
@@ -165,6 +167,15 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	}
 
 	public String saveTimesheet() {
+		checkEmptyRow();
+		timesheetManager.add(currentTimesheet);
+		timesheetList = getTimesheets(currentTimesheet.getEmployee());
+
+		return "displayTimesheet";
+	}
+	
+	
+	private void checkEmptyRow(){
 		List<TimesheetRow> list = new ArrayList<TimesheetRow>();
 		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
 			if (timesheetRow.getProjectID() == null
@@ -173,12 +184,8 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 					|| timesheetRow.getWorkPackage().equals(""))
 				list.add(timesheetRow);
 		}
-		System.out.println(currentTimesheet.getEndWeek().toString());
+		
 		currentTimesheet.getDetails().removeAll(list);
-		timesheetManager.add(currentTimesheet);
-		timesheetList = getTimesheets(currentTimesheet.getEmployee());
-
-		return "displayTimesheet";
 	}
 
 	public Timesheet getCurrentTimesheet() {
