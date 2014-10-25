@@ -27,7 +27,7 @@
 		
 			<h:panelGrid rows="3" columns="2" class="loginStyle">
 				#{msgs.userName}:<h:inputText value="#{empControl.credential.userName}" />
-				#{msgs.pw}:<h:inputText value="#{empControl.credential.password}" />
+				#{msgs.pw}:<h:inputSecret value="#{empControl.credential.password}" />
 				<h:commandButton class="buttonStyle" value="#{msgs.login}" action="#{empControl.login}" />
 			</h:panelGrid>
 		</h:form>
