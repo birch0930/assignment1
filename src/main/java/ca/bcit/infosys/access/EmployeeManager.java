@@ -21,26 +21,27 @@ public class EmployeeManager implements EmployeeList {
 	private Employee employee;
 	private Credentials credential;
 
-	public Credentials getCredential() {
-		return credential;
-	}
-
-	public void setCredential(Credentials credential) {
-		this.credential = credential;
-	}
-
-	// private boolean submitSuccess;
-	public EmployeeManager() {
-		System.out.println("EmployeeManager");
-	}
-
+	/**
+	 * Create the employee list with fake data.
+	 */
 	private static ArrayList<Employee> empInfo = new
-
 	ArrayList<Employee>(Arrays.asList(new Employee("user1", 1, "u1", 0),
 			new Employee("user2", 2, "u2", 1),
 			new Employee("user3", 3, "u3", 1),
 			new Employee("user4", 4, "u4", 1),
-			new Employee("user5", 5, "u5", 1)));
+			new Employee("user5", 5, "u5", 1)));	
+
+	/**
+	 * Create the fake login combos.
+	 */
+	private static Map<String, String> combos = new HashMap<String, String>();
+	{
+		combos.put("u1", "aaa");
+		combos.put("u2", "bbb");
+		combos.put("u3", "ccc");
+		combos.put("u4", "ddd");
+		combos.put("u5", "eee");
+	}
 
 	/**
 	 * Return Employee table for all Employees.
@@ -76,34 +77,36 @@ public class EmployeeManager implements EmployeeList {
 		}
 		return null;
 	}
-
-	private static Map<String, String> combos = new HashMap<String, String>();
-	{
-		combos.put("u1", "aaa");
-		combos.put("u2", "bbb");
-		combos.put("u3", "ccc");
-		combos.put("u4", "ddd");
-		combos.put("u5", "eee");
-	}
-
 	
+	/**
+	 * return the login combos.
+	 */
 	@Override
 	public Map<String, String> getLoginCombos() {
-
 		return combos;
 	}
 
+	/**
+	 * get the current employee.
+	 */
 	@Override
 	public Employee getCurrentEmployee() {
 		// TODO Auto-generated method stub
 		return employee;
 	}
 
+	/**
+	 * Return the super user which is just the first one 
+	 * stored in the list.
+	 */
 	@Override
 	public Employee getAdministrator() {
 		return empInfo.get(0);
 	}
 
+	/**
+	 * Verify if the user name match the password.
+	 */
 	@Override
 	public boolean verifyUser(Credentials credential) {
 		Map<String, String> combos = getLoginCombos();
@@ -120,25 +123,39 @@ public class EmployeeManager implements EmployeeList {
 		return false;
 	}
 
+	/**
+	 * logout and set the current employee to null.
+	 */
 	@Override
 	public String logout(Employee employee) {
 		this.employee = null;
-		return null;
+		return "login";
 	}
 
+	/**
+	 * delete the employee.
+	 */
 	@Override
 	public void deleteEmpoyee(Employee employee) {
 		empInfo.remove(employee);
 	}
 
+	/**
+	 * add employee to the list.
+	 */
 	@Override
 	public void addEmployee(Employee newEmployee) {
 		empInfo.add(newEmployee);
-		/*
-		 * for(Employee emp : empInfo){ System.out.println(emp.getName()); }
-		 */
 	}
 
+	public Credentials getCredential() {
+		return credential;
+	}
+
+	public void setCredential(Credentials credential) {
+		this.credential = credential;
+	}
+	
 	public Employee getEmployee() {
 		return employee;
 	}

@@ -18,9 +18,6 @@
 					styleClass="myButton" >
 					<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
 				</h:commandButton>
-				
-				<h:commandButton value="#{msgs.logout}"
-					action="#{empControl.empManager.logout(empControl.currentEmployee)}"
 				<h:commandButton value="Logout"
 					action="#{empControl.empManager.logout(empControl.currentEmployee)}"
 					styleClass="myButton" />
