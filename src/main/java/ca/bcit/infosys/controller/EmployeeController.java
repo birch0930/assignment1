@@ -45,13 +45,11 @@ public class EmployeeController implements Serializable {
 	/**
 	 * Hold the new password
 	 */
-	private String newPassword;
+	private String newPassword = "";
 	/**
 	 * Map that will hold the credential combos.
 	 */
 	private Map<String, String> credenCombo;
-	//@Inject
-	//private Conversation conversation;
 	@Inject private Credentials credential;
 	@Inject private Employee currentEmployee;
 	
@@ -142,11 +140,9 @@ public class EmployeeController implements Serializable {
 	 * @return
 	 */
 	public String newEmployee() {
-		//conversation.begin();
 		if (employee != null)
-			newEmp = new Employee(employee.getName(),employee.getEmpNumber(),employee.getUserName(),employee.getType());
+			newEmp = new Employee(employee.getName(),employee.getEmpNumber(),employee.getUserName(), 1);
 			empManager.addEmployee(newEmp);
-		//conversation.end();
 		return "superShowUser";
 	}
 
@@ -196,7 +192,7 @@ public class EmployeeController implements Serializable {
 	}
 	
 	public String add(){
-		//conversation.begin();
+		employee = new Employee();
 		return "newEmp";
 	}
 	
@@ -208,6 +204,7 @@ public class EmployeeController implements Serializable {
 	 */
 	public String displayEditEmp (Employee e) {
 		editEmp = e;
+		newPassword = "";
 		return "changePassword";		
 	}
 	
