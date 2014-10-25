@@ -116,7 +116,7 @@
 	padding:6px 14px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #154682;
-	width:150px;
+	width:100%;
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
@@ -133,10 +133,9 @@
 	top:1px;
 }
 
-.mxl{width:80%;}   // 定义表格整体样式：宽度
-   //  以下定义每列的样式
+
 .list-column1-center{
-text-align: center;
+  text-align: center;
   width: 12%;
 }
 .list-column2-center {
@@ -185,3 +184,8 @@ text-align: center;
 }.list-column13-center {
   text-align: center;
   width: 8%;
+}
+.table-footer {
+  text-align: center;
+
+}

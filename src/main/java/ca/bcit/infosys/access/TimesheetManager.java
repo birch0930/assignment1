@@ -6,26 +6,37 @@ import java.util.List;
 import ca.bcit.infosys.timesheet.Timesheet;
 
 /**
- * 
  * @author Huanan
  *
  */
 
-
 public class TimesheetManager implements java.io.Serializable{
 	
-
+	
+	/**
+	 *  database simulator
+	 * 
+	 */
 	static private List<Timesheet>  timesheetList =  new ArrayList<Timesheet>(); 
 	
 	
 	
+	/**
+	 *  Constructor
+	 */
 	public TimesheetManager() {
 	}
 
+	/**
+	 * @param Timesheet timesheet
+	 */
 	public void add(Timesheet timesheet){
 		timesheetList.add(timesheet);
 	}
 	
+	/**
+	 * @param Timesheet timesheet
+	 */
 	public void update(Timesheet timesheet){
 		int index = timesheetList.indexOf(timesheet);
 		if(index != -1)
@@ -34,6 +45,9 @@ public class TimesheetManager implements java.io.Serializable{
 	}
 
 	
+	/**
+	 * @return List<Timesheet> timesheetList
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Timesheet> getTimesheets() {
 		

@@ -23,7 +23,7 @@
 
 		<ui:define name="content">
 
-
+			<h:messages globalOnly="true" />
 			<h:panelGrid columns="8">
 		
 		#{msgs.empNum}: <h:outputText
@@ -40,13 +40,14 @@
 
 
 			<h:form>
-				<h:commandLink value="#{msgs.pre}" action="#{sheetControl.previous}" style="margin-right:65%"/>
-			
+				<h:commandLink value="#{msgs.pre}" action="#{sheetControl.previous}"
+					style="margin-right:85%" />
+
 				<h:commandLink value="#{msgs.next}"
 					action="#{sheetControl.nextTimesheet}" />
 				<h:dataTable value="#{sheetControl.currentTimesheet.details}"
 					rendered="#{ not empty sheetControl.currentTimesheet.details }"
-					var="row" id="table" border="1" styleClass="mxl"
+					var="row" id="table" border="1" footerClass="table-footer"
 					columnClasses="list-column1-center,list-column2-center,list-column3-center,
                                                             list-column4-center,list-column5-center,
                                                             list-column6-center,list-column7-center,
@@ -64,9 +65,7 @@
 						<h:inputText rendered="#{row.editable}" value="#{row.projectID}"
 							size="10" />
 						<f:facet name="footer">
-
-							<h:commandButton action="#{sheetControl.addRow}"
-								value="#{msgs.newRow}" />
+							<h:outputText value="#{msgs.formTotal}" />
 						</f:facet>
 					</h:column>
 					<h:column>
@@ -83,6 +82,10 @@
             		#{msgs.formTotal}
             	</f:facet>
 						<h:outputText value="#{row.sum}" size="5" />
+
+						<f:facet name="footer">
+							<h:outputText value="#{sheetControl.currentTimesheet.totalHours}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -92,6 +95,11 @@
 							value="#{row.hoursForWeek[0]}" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[0]}" size="5" />
+
+						<f:facet name="footer">
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[0]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -101,6 +109,11 @@
 							value="#{row.hoursForWeek[1]}" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[1]}" size="5" />
+						<f:facet name="footer">
+
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[1]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -110,6 +123,11 @@
 							value="#{row.hoursForWeek[2]}" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[2]}" size="5" />
+						<f:facet name="footer">
+
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[2]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -119,6 +137,11 @@
 							value="#{row.hoursForWeek[3]}" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[3]}" size="5" />
+						<f:facet name="footer">
+
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[3]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -128,6 +151,11 @@
 							value="#{row.hoursForWeek[4]}" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[4]}" size="5" />
+						<f:facet name="footer">
+
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[4]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -137,6 +165,10 @@
 							value="#{row.hoursForWeek[5]}" size="5" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[5]}" size="5" />
+						<f:facet name="footer">
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[5]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -146,6 +178,10 @@
 							value="#{row.hoursForWeek[6]}" size="5" />
 						<h:inputText rendered="#{row.editable}"
 							value="#{row.hoursForWeek[6]}" size="5" />
+						<f:facet name="footer">
+							<h:outputText
+								value="#{sheetControl.currentTimesheet.dailyHours[6]}" />
+						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -167,7 +203,12 @@
 						<h:commandLink value="#{msgs.del}"
 							action="#{sheetControl.delRow(row)}" />
 					</h:column>
-
+					<f:facet name="footer">
+						<h:panelGrid>
+							<h:commandButton action="#{sheetControl.addRow}"
+								value="#{msgs.newRow}" />
+						</h:panelGrid>
+					</f:facet>
 				</h:dataTable>
 
 

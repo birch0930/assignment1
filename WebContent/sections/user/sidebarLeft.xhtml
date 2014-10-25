@@ -11,8 +11,8 @@
         
         	<h:form>
         		<h:commandButton value="#{msgs.newTimesheet}"  action="#{sheetControl.addTimesheet}" styleClass="myButton">
--        			<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
--        		</h:commandButton>
+	       			<f:setPropertyActionListener target="#{sheetControl.userName}" value="#{empControl.currentEmployee.userName}" />
+        		</h:commandButton>
 				<h:commandButton value="#{msgs.currentTimesheet}"
 					action="#{sheetControl.displayCurrentTimesheet}"
 					styleClass="myButton" >

@@ -22,17 +22,23 @@ import ca.bcit.infosys.timesheet.Timesheet;
 import ca.bcit.infosys.timesheet.TimesheetCollection;
 import ca.bcit.infosys.timesheet.TimesheetRow;
 
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.FacesEvent;
+import javax.faces.event.PhaseId;
+import javax.faces.event.ValueChangeEvent;
+
 /**
  * 
  * @author Huanan
  *
  */
+
 @Named("sheetControl")
 @SessionScoped
 public class TimeSheetController implements Serializable, TimesheetCollection {
 
-	@Inject
-	private EmployeeController empControl;
 	@Inject
 	private EmployeeManager employeeManager;
 	@Inject
@@ -43,17 +49,19 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 	private Employee employee;
 	static private String userName;
 
-
+	/**
+	 * Default Constructor
+	 */
 	public TimeSheetController() {
 
 	}
-//
-//	private void init() {
-//		if (userName != null && !userName.equals("")) {
-//			employee = employeeManager.getEmployee(userName);
-//			currentTimesheet = getCurrentTimesheet(employee);
-//		}
-//	}
+
+	public void handleEvent(ValueChangeEvent   event) {
+		Integer dueDate= (Integer) event.getNewValue();
+	//	Integer dueDate = (Integer)((UIInput)event.getSource()).getValue(); both works
+		currentTimesheet.setWeekNumber(dueDate, Calendar.getInstance().get(Calendar.YEAR));
+	}
+
 
 	@Override
 	public List<Timesheet> getTimesheets() {
@@ -75,6 +83,9 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return timesheetList;
 	}
 
+	/**
+	 * @return display current timesheet
+	 */
 	public String displayCurrentTimesheet() {
 
 		currentTimesheet = getCurrentTimesheet(employee);
@@ -105,6 +116,9 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return "newTimesheet.xhtml";
 	}
 
+	/**
+	 * add a row
+	 */
 	public void addRow() {
 
 		System.out.println(userName);
@@ -113,8 +127,12 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		timesheetList = getTimesheets(currentTimesheet.getEmployee());
 	}
 
+	/**
+	 * show previous timesheet
+	 * 
+	 * @return current page
+	 */
 	public String previous() {
-		
 		int index = timesheetList.indexOf(currentTimesheet);
 		index--;
 		if (index >= 0) {
@@ -122,10 +140,14 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 			if (nt != null)
 				currentTimesheet = nt;
 		}
-
 		return "";
 	}
 
+	/**
+	 * show later timesheet
+	 * 
+	 * @return current page
+	 */
 	public String nextTimesheet() {
 		int index = timesheetList.indexOf(currentTimesheet);
 		index++;
@@ -138,6 +160,10 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return "";
 	}
 
+	/**
+	 * @param row
+	 * @return current page
+	 */
 	public String editTimesheet(TimesheetRow row) {
 		row.setEditable(true);
 		timesheetManager.update(currentTimesheet);
@@ -145,6 +171,9 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return "";
 	}
 
+	/**
+	 * @return display page
+	 */
 	public String updateTimesheet() {
 		checkEmptyRow();
 		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
@@ -153,11 +182,13 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		}
 		timesheetManager.update(currentTimesheet);
 		timesheetList = getTimesheets(currentTimesheet.getEmployee());
-		return "displayTimesheet.xhtml";
+		return "displayTimesheet";
 	}
 
-	
-	
+	/**
+	 * @param Row
+	 * @return display page
+	 */
 	public String delRow(TimesheetRow Row) {
 
 		currentTimesheet.deleteRow(Row);
@@ -166,6 +197,9 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 		return "displayTimesheet";
 	}
 
+	/**
+	 * @return display page
+	 */
 	public String saveTimesheet() {
 		checkEmptyRow();
 		timesheetManager.add(currentTimesheet);
@@ -173,9 +207,12 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 
 		return "displayTimesheet";
 	}
-	
-	
-	private void checkEmptyRow(){
+
+	/**
+	 * when saving or updating new timesheet, check if projectId or work package
+	 * is empty, then ignore it
+	 */
+	private void checkEmptyRow() {
 		List<TimesheetRow> list = new ArrayList<TimesheetRow>();
 		for (TimesheetRow timesheetRow : currentTimesheet.getDetails()) {
 			if (timesheetRow.getProjectID() == null
@@ -184,63 +221,62 @@ public class TimeSheetController implements Serializable, TimesheetCollection {
 					|| timesheetRow.getWorkPackage().equals(""))
 				list.add(timesheetRow);
 		}
-		
+
 		currentTimesheet.getDetails().removeAll(list);
 	}
 
+	/**
+	 * @return currentTimesheet
+	 */
 	public Timesheet getCurrentTimesheet() {
 		return currentTimesheet;
 	}
 
+	/**
+	 * @param currentTimesheet
+	 */
 	public void setCurrentTimesheet(Timesheet currentTimesheet) {
 		this.currentTimesheet = currentTimesheet;
 	}
 
-	public EmployeeController getEmpControl() {
-		return empControl;
-	}
-
-	public void setEmpControl(EmployeeController empControl) {
-		this.empControl = empControl;
-	}
-
-	public TimesheetManager getTimesheetManager() {
-		return timesheetManager;
-	}
-
-	public void setTimesheetManager(TimesheetManager timesheetManager) {
-		this.timesheetManager = timesheetManager;
-	}
-
-
-	public EmployeeManager getEmployeeManager() {
-		return employeeManager;
-	}
-
-	public void setEmployeeManager(EmployeeManager employeeManager) {
-		this.employeeManager = employeeManager;
-	}
-
+	/**
+	 * @return
+	 */
 	public String getUserName() {
 		return userName;
 	}
 
+	/**
+	 * @param userName
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+	/**
+	 * @return
+	 */
 	public List<Timesheet> getTimesheetList() {
 		return timesheetList;
 	}
 
+	/**
+	 * @param timesheetList
+	 */
 	public void setTimesheetList(List<Timesheet> timesheetList) {
 		this.timesheetList = timesheetList;
 	}
 
+	/**
+	 * @return
+	 */
 	public Employee getEmployee() {
 		return employee;
 	}
 
+	/**
+	 * @param employee
+	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
