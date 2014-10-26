@@ -95,6 +95,7 @@ public class EmployeeController implements Serializable {
 		boolean result = empManager.verifyUser(credential);		
 		if (result) {
 			int type = empManager.getEmployee(credential.getUserName()).getType();
+			credential = new Credentials();
 			if (type == 0){
 				getEmployees();
 				getCredentials();
@@ -108,7 +109,6 @@ public class EmployeeController implements Serializable {
 
 	public String logout() {
 		empManager.logout(currentEmployee);
-		credential = new Credentials();
 		return "login";
 	}
 	/**
